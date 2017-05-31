@@ -1,10 +1,12 @@
-#extend("base")
+#extend("embeds/base")
 
-#export("title") { It works }
+#export("title") { Welcome }
 
 #export("content") {
-	<div class="welcome">
-		<img src="/images/it-works.png">
-	</div>
+<div class="page-content">
+    <div class="container-fluid">
+        Content
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
 }
 

@@ -1,0 +1,12 @@
+#extend("embeds/base")
+
+#export("title") { Index }
+
+#export("content") {
+<div class="page-content">
+    <div class="container-fluid">
+        Content
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+}
+
