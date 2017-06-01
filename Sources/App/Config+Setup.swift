@@ -34,6 +34,7 @@ extension Config {
         preparations.append(Regiao.self)
         preparations.append(Servico.self)
         preparations.append(ServicoTipo.self)
+        preparations.append(Sofa.self)
         preparations.append(Status.self)
         preparations.append(Tapete.self)
         preparations.append(Usuario.self)

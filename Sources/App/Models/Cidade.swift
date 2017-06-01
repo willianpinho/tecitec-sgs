@@ -75,10 +75,8 @@ extension Cidade: Preparation {
 extension Cidade: JSONConvertible {
     convenience init(json: JSON) throws {
         try self.init(
-            nome: json.get("regiao_id"),
+            regiao: json.get("regiao_id"),
             nome: json.get("nome")
-
-            
         )
     }
     

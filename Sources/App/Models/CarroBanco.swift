@@ -82,7 +82,7 @@ extension CarroBanco: JSONConvertible {
     convenience init(json: JSON) throws {
         try self.init(
             tipoItem: json.get("item_tipo_id"),
-            largura: json.get("carro_id"),
+            carro: json.get("carro_id"),
             material: json.get("material_id")
         )
     }

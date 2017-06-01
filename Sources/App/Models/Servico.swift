@@ -22,7 +22,7 @@ final class Servico: Model {
     var preco: Double
     
     /// Creates a new Servico
-    init(tipoServico: ServicoTipo, item: Item, custo: Double, preco: Double) {
+    init(tipoServico: ServicoTipo, item: ItemTipo, custo: Double, preco: Double) {
         self.tipoServico = tipoServico.id
         self.item = item.id
         self.custo = custo

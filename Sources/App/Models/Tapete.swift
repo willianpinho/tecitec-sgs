@@ -11,7 +11,7 @@ import FluentProvider
 import HTTP
 
 final class Tapete: Model {
-    static let entity = "poltronas"
+    static let entity = "tapetes"
     
     let storage = Storage()
     

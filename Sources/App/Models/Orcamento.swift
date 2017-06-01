@@ -39,7 +39,7 @@ final class Orcamento: Model {
     /// database row
     init(row: Row) throws {
         codigo = try row.get("codigo")
-        atendente= try row.get("atendente_id")
+        atendente = try row.get("atendente_id")
         cliente = try row.get("cliente_id")
         vendedor = try row.get("vendedor")
         empresa = try row.get("empresa_id")
