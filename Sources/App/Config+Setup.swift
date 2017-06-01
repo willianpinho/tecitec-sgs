@@ -1,4 +1,5 @@
 import LeafProvider
+import FluentProvider
 
 extension Config {
     public func setup() throws {
@@ -7,6 +8,8 @@ extension Config {
         Node.fuzzy = [JSON.self, Node.self]
 
         try setupProviders()
+        try setupPreparations()
+
     }
     
     /// Configure providers
@@ -17,15 +20,24 @@ extension Config {
     /// Add all models that should have their
     /// schemas prepared before the app boots
     private func setupPreparations() throws {
-        preparations.append(Cliente.self)
+        preparations.append(Carro.self)
+        preparations.append(CarroBanco.self)
+        preparations.append(Cidade.self)
+        preparations.append(Colchao.self)
         preparations.append(Empresa.self)
-        preparations.append(Movel.self)
-        preparations.append(MovelTipo.self)
+        preparations.append(ItemTipo.self)
+        preparations.append(Material.self)
         preparations.append(Orcamento.self)
+        preparations.append(OrcamentoItem.self)
         preparations.append(Perfil.self)
+        preparations.append(Poltrona.self)
         preparations.append(Regiao.self)
         preparations.append(Servico.self)
         preparations.append(ServicoTipo.self)
+        preparations.append(Status.self)
+        preparations.append(Tapete.self)
         preparations.append(Usuario.self)
+        preparations.append(UsuarioTipo.self)
+
     }
 }

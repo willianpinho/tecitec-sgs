@@ -14,6 +14,12 @@
       "version": "1.0.0"
     },
     {
+      "package": "CMySQL",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/cmysql.git",
+      "version": "2.0.2"
+    },
+    {
       "package": "CTLS",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/ctls.git",
@@ -50,6 +56,18 @@
       "version": "2.0.3"
     },
     {
+      "package": "Fluent",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/fluent.git",
+      "version": "2.0.2"
+    },
+    {
+      "package": "FluentProvider",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/fluent-provider.git",
+      "version": "1.0.0"
+    },
+    {
       "package": "JSON",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/json.git",
@@ -74,6 +92,24 @@
       "version": "2.0.0"
     },
     {
+      "package": "MySQL",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/mysql.git",
+      "version": "2.0.0"
+    },
+    {
+      "package": "MySQLDriver",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/mysql-driver.git",
+      "version": "2.0.1"
+    },
+    {
+      "package": "MySQLProvider",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/mysql-provider.git",
+      "version": "2.0.0"
+    },
+    {
       "package": "Node",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/node.git",
@@ -92,6 +128,12 @@
       "version": "2.0.0"
     },
     {
+      "package": "SQLite",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/sqlite.git",
+      "version": "2.0.0"
+    },
+    {
       "package": "Sockets",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/sockets.git",
@@ -101,7 +143,7 @@
       "package": "TLS",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/tls.git",
-      "version": "2.0.1"
+      "version": "2.0.2"
     },
     {
       "package": "Vapor",

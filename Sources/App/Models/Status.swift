@@ -1,8 +1,8 @@
 //
-//  ServicoTipo.swift
+//  Status.swift
 //  Tecitec
 //
-//  Created by Willian Pinho on 5/30/17.
+//  Created by Willian Pinho on 6/1/17.
 //
 //
 
@@ -10,37 +10,31 @@ import Vapor
 import FluentProvider
 import HTTP
 
-final class ServicoTipo: Model {
-    static let entity = "servico_tipos"
+final class Status: Model {
+    static let entity = "status"
     
     let storage = Storage()
     
-    /// The content of the servicos_tipo
+    /// The content of the status
     var nome: String
-    var descricao: String
     
-    /// Creates a new ServicoTipo
-    init(nome: String, descricao: String) {
+    /// Creates a new Status
+    init(nome: String) {
         self.nome = nome
-        self.descricao = descricao
     }
     
     // MARK: Fluent Serialization
     
-    /// Initializes the ServicoTipo from the
+    /// Initializes the Status from the
     /// database row
     init(row: Row) throws {
         nome = try row.get("nome")
-        descricao = try row.get("descricao")
-
     }
     
-    // Serializes the ServicoTipo to the database
+    // Serializes the Status to the database
     func makeRow() throws -> Row {
         var row = Row()
         try row.set("nome", nome)
-        try row.set("descricao", descricao)
-
         
         return row
     }
@@ -48,15 +42,13 @@ final class ServicoTipo: Model {
 
 // MARK: Fluent Preparation
 
-extension ServicoTipo: Preparation {
+extension Status: Preparation {
     /// Prepares a table/collection in the database
-    /// for storing ServicoTipos
+    /// for storing Statuss
     static func prepare(_ database: Database) throws {
         try database.create(self) { builder in
             builder.id()
             builder.string("nome")
-            builder.custom("descricao", type: "TEXT")
-
             
         }
     }
@@ -71,15 +63,13 @@ extension ServicoTipo: Preparation {
 
 // How the model converts from / to JSON.
 // For example when:
-//     - Creating a new ServicoTipo (POST /servicos_tipos)
-//     - Fetching a servicos_tipo (GET /servicos_tipos, GET /servicos_tipos/:id)
+//     - Creating a new Status (POST /statuss)
+//     - Fetching a status (GET /statuss, GET /statuss/:id)
 //
-extension ServicoTipo: JSONConvertible {
+extension Status: JSONConvertible {
     convenience init(json: JSON) throws {
         try self.init(
-            nome: json.get("nome"),
-            descricao: json.get("descricao")
-
+            nome: json.get("nome")
             
         )
     }
@@ -88,8 +78,6 @@ extension ServicoTipo: JSONConvertible {
         var json = JSON()
         try json.set("id", id)
         try json.set("nome", nome)
-        try json.set("descricao", descricao)
-
         
         return json
     }
@@ -97,10 +85,10 @@ extension ServicoTipo: JSONConvertible {
 
 // MARK: HTTP
 
-// This allows ServicoTipo models totime
-extension ServicoTipo: ResponseRepresentable { }
+// This allows Status models totime
+extension Status: ResponseRepresentable { }
 
-extension ServicoTipo: Timestampable {
+extension Status: Timestampable {
     static var updatedAtKey: String { return "updated_at" }
     static var createdAtKey: String { return "created_at" }
 }

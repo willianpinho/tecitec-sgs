@@ -1,8 +1,8 @@
 //
-//  ServicoTipo.swift
+//  Cidade.swift
 //  Tecitec
 //
-//  Created by Willian Pinho on 5/30/17.
+//  Created by Willian Pinho on 6/1/17.
 //
 //
 
@@ -10,52 +10,50 @@ import Vapor
 import FluentProvider
 import HTTP
 
-final class ServicoTipo: Model {
-    static let entity = "servico_tipos"
+final class Cidade: Model {
+    static let entity = "cidades"
     
     let storage = Storage()
     
-    /// The content of the servicos_tipo
+    /// The content of the cidades
+    var regiao: Identifier?
     var nome: String
-    var descricao: String
     
-    /// Creates a new ServicoTipo
-    init(nome: String, descricao: String) {
+    /// Creates a new Cidade
+    init(regiao: Regiao, nome: String) {
+        self.regiao = regiao.id
         self.nome = nome
-        self.descricao = descricao
     }
     
     // MARK: Fluent Serialization
     
-    /// Initializes the ServicoTipo from the
+    /// Initializes the Cidade from the
     /// database row
     init(row: Row) throws {
+        regiao = try row.get("regiao_id")
         nome = try row.get("nome")
-        descricao = try row.get("descricao")
-
     }
     
-    // Serializes the ServicoTipo to the database
+    // Serializes the Cidade to the database
     func makeRow() throws -> Row {
         var row = Row()
+        try row.set("regiao_id", regiao)
         try row.set("nome", nome)
-        try row.set("descricao", descricao)
 
-        
         return row
     }
 }
 
 // MARK: Fluent Preparation
 
-extension ServicoTipo: Preparation {
+extension Cidade: Preparation {
     /// Prepares a table/collection in the database
-    /// for storing ServicoTipos
+    /// for storing Cidades
     static func prepare(_ database: Database) throws {
         try database.create(self) { builder in
             builder.id()
+            builder.int("regiao_id")
             builder.string("nome")
-            builder.custom("descricao", type: "TEXT")
 
             
         }
@@ -71,14 +69,14 @@ extension ServicoTipo: Preparation {
 
 // How the model converts from / to JSON.
 // For example when:
-//     - Creating a new ServicoTipo (POST /servicos_tipos)
-//     - Fetching a servicos_tipo (GET /servicos_tipos, GET /servicos_tipos/:id)
+//     - Creating a new Cidade (POST /cidadess)
+//     - Fetching a cidades (GET /cidadess, GET /cidadess/:id)
 //
-extension ServicoTipo: JSONConvertible {
+extension Cidade: JSONConvertible {
     convenience init(json: JSON) throws {
         try self.init(
-            nome: json.get("nome"),
-            descricao: json.get("descricao")
+            nome: json.get("regiao_id"),
+            nome: json.get("nome")
 
             
         )
@@ -87,9 +85,8 @@ extension ServicoTipo: JSONConvertible {
     func makeJSON() throws -> JSON {
         var json = JSON()
         try json.set("id", id)
+        try json.set("regiao_id", regiao)
         try json.set("nome", nome)
-        try json.set("descricao", descricao)
-
         
         return json
     }
@@ -97,10 +94,10 @@ extension ServicoTipo: JSONConvertible {
 
 // MARK: HTTP
 
-// This allows ServicoTipo models totime
-extension ServicoTipo: ResponseRepresentable { }
+// This allows Cidade models totime
+extension Cidade: ResponseRepresentable { }
 
-extension ServicoTipo: Timestampable {
+extension Cidade: Timestampable {
     static var updatedAtKey: String { return "updated_at" }
     static var createdAtKey: String { return "created_at" }
 }

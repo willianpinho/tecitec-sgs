@@ -11,20 +11,26 @@ import FluentProvider
 import HTTP
 
 final class Orcamento: Model {
-    static let entity = "Orcamentos"
+    static let entity = "orcamentos"
     
     let storage = Storage()
     
     /// The content of the Orcamentos
-    var email: String
-    var name: String
-    var role: Identifier?
+    var codigo: String
+    var atendente: Identifier?
+    var cliente: Identifier?
+    var vendedor: String
+    var empresa: Identifier?
+    var observacoes: String
     
     /// Creates a new Orcamento
-    init(email: String, name: String, role: Role) {
-        self.email = email
-        self.name = name
-        self.role = role.id
+    init(codigo: String, atendente: Usuario, cliente: Usuario, vendedor: String, empresa: Empresa, observacoes: String) {
+        self.codigo = codigo
+        self.atendente = atendente.id
+        self.cliente = cliente.id
+        self.vendedor = vendedor
+        self.empresa = empresa.id
+        self.observacoes = observacoes
     }
     
     // MARK: Fluent Serialization
@@ -32,18 +38,25 @@ final class Orcamento: Model {
     /// Initializes the Orcamento from the
     /// database row
     init(row: Row) throws {
-        email = try row.get("email")
-        name = try row.get("name")
-        role = try row.get("role_id")
+        codigo = try row.get("codigo")
+        atendente= try row.get("atendente_id")
+        cliente = try row.get("cliente_id")
+        vendedor = try row.get("vendedor")
+        empresa = try row.get("empresa_id")
+        observacoes = try row.get("observacoes")
+
     }
     
     // Serializes the Orcamento to the database
     func makeRow() throws -> Row {
         var row = Row()
-        try row.set("email", email)
-        try row.set("name", name)
-        try row.set("role", role)
-        
+        try row.set("codigo", codigo)
+        try row.set("atendente_id", atendente)
+        try row.set("cliente_id", cliente)
+        try row.set("vendedor", vendedor)
+        try row.set("empresa_id", empresa)
+        try row.set("observacoes", observacoes)
+
         return row
     }
 }
@@ -56,9 +69,13 @@ extension Orcamento: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { builder in
             builder.id()
-            builder.string("email")
-            builder.string("name")
-            builder.int("role_id")
+            builder.string("codigo")
+            builder.int("atendente_id")
+            builder.int("cliente_id")
+            builder.string("vendedor")
+            builder.int("empresa_id")
+            builder.string("observacoes")
+
             
         }
     }
@@ -79,20 +96,25 @@ extension Orcamento: Preparation {
 extension Orcamento: JSONConvertible {
     convenience init(json: JSON) throws {
         try self.init(
-            email: json.get("email"),
-            name: json.get("name"),
-            role: json.get("role_id")
-            
+            codigo: json.get("codigo"),
+            atendente: json.get("atendente_id"),
+            cliente: json.get("cliente_id"),
+            vendedor: json.get("vendedor"),
+            empresa: json.get("empresa_id"),
+            observacoes: json.get("observacoes")
         )
     }
     
     func makeJSON() throws -> JSON {
         var json = JSON()
         try json.set("id", id)
-        try json.set("email", email)
-        try json.set("name", name)
-        try json.set("role", name)
-        
+        try json.set("codigo", codigo)
+        try json.set("atendente_id", atendente)
+        try json.set("cliente_id", cliente)
+        try json.set("vendedor", vendedor)
+        try json.set("empresa_id", empresa)
+        try json.set("observacoes", observacoes)
+
         return json
     }
 }

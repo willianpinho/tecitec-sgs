@@ -16,15 +16,17 @@ final class Servico: Model {
     let storage = Storage()
     
     /// The content of the servicos
-    var email: String
-    var name: String
-    var role: Identifier?
+    var tipoServico: Identifier?
+    var item: Identifier?
+    var custo: Double
+    var preco: Double
     
     /// Creates a new Servico
-    init(email: String, name: String, role: Role) {
-        self.email = email
-        self.name = name
-        self.role = role.id
+    init(tipoServico: ServicoTipo, item: Item, custo: Double, preco: Double) {
+        self.tipoServico = tipoServico.id
+        self.item = item.id
+        self.custo = custo
+        self.preco = preco
     }
     
     // MARK: Fluent Serialization
@@ -32,18 +34,21 @@ final class Servico: Model {
     /// Initializes the Servico from the
     /// database row
     init(row: Row) throws {
-        email = try row.get("email")
-        name = try row.get("name")
-        role = try row.get("role_id")
+        tipoServico = try row.get("tipo_servico_id")
+        item = try row.get("item_id")
+        custo = try row.get("custo")
+        preco = try row.get("preco")
+
     }
     
     // Serializes the Servico to the database
     func makeRow() throws -> Row {
         var row = Row()
-        try row.set("email", email)
-        try row.set("name", name)
-        try row.set("role", role)
-        
+        try row.set("tipo_servico_id", tipoServico)
+        try row.set("item_id", item)
+        try row.set("custo", custo)
+        try row.set("preco", preco)
+
         return row
     }
 }
@@ -56,9 +61,11 @@ extension Servico: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { builder in
             builder.id()
-            builder.string("email")
-            builder.string("name")
-            builder.int("role_id")
+            builder.int("tipo_servico_id")
+            builder.int("item_id")
+            builder.double("custo")
+            builder.double("preco")
+
             
         }
     }
@@ -79,20 +86,21 @@ extension Servico: Preparation {
 extension Servico: JSONConvertible {
     convenience init(json: JSON) throws {
         try self.init(
-            email: json.get("email"),
-            name: json.get("name"),
-            role: json.get("role_id")
-            
+            tipoServico: json.get("tipo_servico_id"),
+            item: json.get("item_id"),
+            custo: json.get("custo"),
+            preco: json.get("preco")
         )
     }
     
     func makeJSON() throws -> JSON {
         var json = JSON()
         try json.set("id", id)
-        try json.set("email", email)
-        try json.set("name", name)
-        try json.set("role", name)
-        
+        try json.set("tipo_servico_id", tipoServico)
+        try json.set("item_id", item)
+        try json.set("custo", custo)
+        try json.set("preco", preco)
+
         return json
     }
 }

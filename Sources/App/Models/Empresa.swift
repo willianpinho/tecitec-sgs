@@ -2,7 +2,7 @@
 //  Empresa.swift
 //  Tecitec
 //
-//  Created by Willian Pinho on 5/30/17.
+//  Created by Willian Pinho on 6/1/17.
 //
 //
 
@@ -16,15 +16,13 @@ final class Empresa: Model {
     let storage = Storage()
     
     /// The content of the empresas
-    var email: String
-    var name: String
-    var perfil: Identifier?
+    var nome: String
+    var cnpj: String
     
     /// Creates a new Empresa
-    init(email: String, name: String, perfil: Role) {
-        self.email = email
-        self.name = name
-        self.perfil = perfil.id
+    init(nome: String, cnpj: String) {
+        self.nome = nome
+        self.cnpj = cnpj
     }
     
     // MARK: Fluent Serialization
@@ -32,17 +30,17 @@ final class Empresa: Model {
     /// Initializes the Empresa from the
     /// database row
     init(row: Row) throws {
-        email = try row.get("email")
-        name = try row.get("name")
-        perfil = try row.get("perfil_id")
+        nome = try row.get("nome")
+        cnpj = try row.get("cnpj")
+
     }
     
     // Serializes the Empresa to the database
     func makeRow() throws -> Row {
         var row = Row()
-        try row.set("email", email)
-        try row.set("name", name)
-        try row.set("perfil", perfil)
+        try row.set("nome", nome)
+        try row.set("cnpj", cnpj)
+
         
         return row
     }
@@ -56,9 +54,9 @@ extension Empresa: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { builder in
             builder.id()
-            builder.string("email")
-            builder.string("name")
-            builder.int("perfil_id")
+            builder.string("nome")
+            builder.string("cnpj")
+
             
         }
     }
@@ -79,20 +77,17 @@ extension Empresa: Preparation {
 extension Empresa: JSONConvertible {
     convenience init(json: JSON) throws {
         try self.init(
-            email: json.get("email"),
-            name: json.get("name"),
-            perfil: json.get("perfil_id")
-            
+            nome: json.get("nome"),
+            cnpj: json.get("cnpj")
         )
     }
     
     func makeJSON() throws -> JSON {
         var json = JSON()
         try json.set("id", id)
-        try json.set("email", email)
-        try json.set("name", name)
-        try json.set("perfil", name)
-        
+        try json.set("nome", nome)
+        try json.set("cnpj", cnpj)
+
         return json
     }
 }

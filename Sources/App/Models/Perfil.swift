@@ -16,15 +16,11 @@ final class Perfil: Model {
     let storage = Storage()
     
     /// The content of the perfis
-    var email: String
     var name: String
-    var role: Identifier?
     
     /// Creates a new Perfil
-    init(email: String, name: String, role: Role) {
-        self.email = email
+    init(name: String) {
         self.name = name
-        self.role = role.id
     }
     
     // MARK: Fluent Serialization
@@ -32,17 +28,13 @@ final class Perfil: Model {
     /// Initializes the Perfil from the
     /// database row
     init(row: Row) throws {
-        email = try row.get("email")
         name = try row.get("name")
-        role = try row.get("role_id")
     }
     
     // Serializes the Perfil to the database
     func makeRow() throws -> Row {
         var row = Row()
-        try row.set("email", email)
         try row.set("name", name)
-        try row.set("role", role)
         
         return row
     }
@@ -56,9 +48,7 @@ extension Perfil: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { builder in
             builder.id()
-            builder.string("email")
             builder.string("name")
-            builder.int("role_id")
             
         }
     }
@@ -79,9 +69,7 @@ extension Perfil: Preparation {
 extension Perfil: JSONConvertible {
     convenience init(json: JSON) throws {
         try self.init(
-            email: json.get("email"),
-            name: json.get("name"),
-            role: json.get("role_id")
+            name: json.get("name")
             
         )
     }
@@ -89,9 +77,7 @@ extension Perfil: JSONConvertible {
     func makeJSON() throws -> JSON {
         var json = JSON()
         try json.set("id", id)
-        try json.set("email", email)
         try json.set("name", name)
-        try json.set("role", name)
         
         return json
     }
