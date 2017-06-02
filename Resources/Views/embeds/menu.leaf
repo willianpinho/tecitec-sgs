@@ -1,45 +1,62 @@
 <div class="mobile-menu-left-overlay"></div>
 <nav class="side-menu side-menu-compact">
     <ul class="side-menu-list">
-        #raw(){
-        <li class="brown">
-            <a href="#">
+        <li class="purple">
+            <a href="/dashboard">
                 <i class="font-icon font-icon-home"></i>
                 <span class="lbl">Início</span>
             </a>
         </li>
-        <li class="green">
-            <a href="#">
+        <li class="blue">
+            <a href="/calendario">
                 <i class="font-icon font-icon-calend"></i>
                 <span class="lbl">Calendário</span>
             </a>
         </li>
         <li class="green">
-            <a href="#">
+            <a href="/orcamentos">
                 <i class="font-icon font-icon-page"></i>
                 <span class="lbl">Orçamentos</span>
             </a>
         </li>
-        <li class="gold">
-            <a href="#">
+        <li class="magenta">
+            <a href="/servicos">
                 <i class="font-icon font-icon-check-square"></i>
                 <span class="lbl">Serviços</span>
             </a>
         </li>
-        <li class="blue">
-            <a href="#">
+        <li class="coral">
+            <a href="/clientes">
                 <i class="font-icon font-icon-user"></i>
                 <span class="lbl">Clientes</span>
             </a>
         </li>
-        <li class="orange-red">
-            <a href="#">
+        <li class="gold">
+            <a href="/comissoes">
+                <i class="font-icon font-icon-star"></i>
+                <span class="lbl">Comissões</span>
+            </a>
+        </li>
+        <li class="blue-dark">
+            <a href="/relatorios">
+                <i class="font-icon font-icon-chart-2"></i>
+                <span class="lbl">Relatórios</span>
+            </a>
+        </li>
+        <li class="blue-sky">
+            <a href="/historico">
+                <i class="font-icon font-icon-zigzag"></i>
+                <span class="lbl">Histórico</span>
+            </a>
+        </li>
+        <li class="red">
+            <a href="/configuracoes">
                 <i class="font-icon font-icon-cogwheel"></i>
                 <span class="lbl">Configurações</span>
             </a>
         </li>
         
-        }
+        
         
     </ul>
 </nav><!--.side-menu-->

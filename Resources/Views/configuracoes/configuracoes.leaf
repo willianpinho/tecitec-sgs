@@ -1,0 +1,134 @@
+#extend("embeds/base")
+
+#export("title") { Tecitec - Configurações }
+
+#export("content") {
+<div class="page-content">
+    <div class="container-fluid">
+<header class="section-header">
+<div class="tbl">
+<div class="tbl-row">
+<div class="tbl-cell">
+<h3>Configurações</h3>
+<ol class="breadcrumb breadcrumb-simple">
+<li><a href="">Início</a></li>
+<li class="active">Configurações</li>
+</ol>
+</div>
+</div>
+</div>
+</header>
+
+        <div class="col-md-12">
+
+
+            <div class="row">
+                <div class="col-xs-3">
+                    <section class="widget widget-simple-sm">
+                        <div class="widget-simple-sm-icon">
+                            <i class="fa fa-bars color-blue"></i>
+                        </div>
+                        <div class="widget-simple-sm-bottom">Tipos de Serviços</div>
+                    </section><!--.widget-simple-sm-->
+                </div>
+                <div class="col-xs-3">
+                    <section class="widget widget-simple-sm">
+                        <div class="widget-simple-sm-icon">
+                            <i class="fa fa-car  color-blue"></i>
+                        </div>
+                        <div class="widget-simple-sm-bottom">
+                            <a href="">Carros</a>
+                        </div>
+                    </section><!--.widget-simple-sm-->
+                </div>
+                
+                
+                <div class="col-xs-3">
+                    <section class="widget widget-simple-sm">
+                        <div class="widget-simple-sm-icon">
+                            <i class="fa fa-map color-blue"></i>
+                        </div>
+                        <div class="widget-simple-sm-bottom">
+                            <a href="">Regiões</a>
+                        </div>
+                    </section><!--.widget-simple-sm-->
+                </div>
+                
+                <div class="col-xs-3">
+                    <section class="widget widget-simple-sm">
+                        <div class="widget-simple-sm-icon">
+                            <i class="fa fa-map-pin color-blue"></i>
+                        </div>
+                        <div class="widget-simple-sm-bottom">
+                            <a href="">Cidades</a>
+                        </div>
+                    </section><!--.widget-simple-sm-->
+                </div>
+                
+                
+                
+                <div class="col-xs-3">
+                    <section class="widget widget-simple-sm">
+                        <div class="widget-simple-sm-icon">
+                            <i class="fa fa-building-o color-blue"></i>
+                        </div>
+                        <div class="widget-simple-sm-bottom">
+                            <a href="">Empresas</a>
+                        </div>
+                    </section><!--.widget-simple-sm-->
+                </div>
+                
+                <div class="col-xs-3">
+                    <section class="widget widget-simple-sm">
+                        <div class="widget-simple-sm-icon">
+                            <i class="fa fa-inbox color-blue"></i>
+                        </div>
+                        <div class="widget-simple-sm-bottom">
+                            <a href="">Itens</a>
+                        </div>
+                    </section><!--.widget-simple-sm-->
+                </div>
+                
+                <div class="col-xs-3">
+                    <section class="widget widget-simple-sm">
+                        <div class="widget-simple-sm-icon">
+                            <i class="fa fa-suitcase color-blue"></i>
+                        </div>
+                        <div class="widget-simple-sm-bottom">
+                            <a href="">Materiais</a>
+                        </div>
+                    </section><!--.widget-simple-sm-->
+                </div>
+                
+                <div class="col-xs-3">
+                    <section class="widget widget-simple-sm">
+                        <div class="widget-simple-sm-icon">
+                            <i class="fa fa-dashboard color-blue"></i>
+                        </div>
+                        <div class="widget-simple-sm-bottom">
+                            <a href="">Tipos de Status</a>
+                        </div>
+                    </section><!--.widget-simple-sm-->
+                </div>
+                
+                <div class="col-xs-3">
+                    <section class="widget widget-simple-sm">
+                        <div class="widget-simple-sm-icon">
+                            <i class="fa fa-users color-blue"></i>
+                        </div>
+                        <div class="widget-simple-sm-bottom">
+                            <a href="">Tipos de Usuários</a>
+                        </div>
+                    </section><!--.widget-simple-sm-->
+                </div>
+                
+
+            </div><!--.row-->
+            
+            
+            
+        </div>
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+}
+
