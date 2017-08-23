@@ -1,0 +1,366 @@
+#extend("embeds/base")
+
+#export("title") { Tecitec - Serviços }
+
+#export("content") {
+<div class="page-content">
+    <div class="container-fluid">
+<header class="section-header">
+<div class="tbl">
+<div class="tbl-row">
+<div class="tbl-cell">
+<h3>Serviços</h3>
+<ol class="breadcrumb breadcrumb-simple">
+<li><a href="">Início</a></li>
+<li class="active">Serviços</li>
+</ol>
+</div>
+</div>
+</div>
+</header>
+
+<h1>Serviços de 02/06/2017</h1>
+
+        <div class="tasks-grid">
+            <div class="tasks-grid-col red">
+
+                <div class="tasks-grid-col-title">A Executar <strong>1</strong></div>
+
+                
+                <div class="sortable">
+                    <section class="box-typical task-card task">
+                        <div class="task-card-photo">
+                            <img src="/img/img-task.jpg" alt="">
+                                </div>
+                        <div class="task-card-in">
+                            <div class="btn-group task-card-menu">
+                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="font-icon-dots-vert-square"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-pencil"></i>Edit</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-archive"></i>Archive</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-trash"></i>Delete</a>
+                                </div>
+                            </div>
+                            <div class="task-card-title">
+                                <a href="">Create new webpage for sales and marketing stuff</a>
+                                <span class="task-card-title-label">(BIG)</span>
+                            </div>
+                            <div class="progress-compact-style">
+                                <progress class="progress" value="25" max="100">
+                                    <div class="progress">
+                                        <span class="progress-bar" style="width: 25%;">25%</span>
+                                    </div>
+                                </progress>
+                                <div class="progress-compact-style-label">37% done</div>
+                            </div>
+                            <div class="task-card-tags">
+                                <a href="" class="label label-light-grey">Default</a>
+                                <a href="" class="label label-light-grey">Primary</a>
+                                <a href="" class="label label-light-grey">Success</a>
+                            </div>
+                        </div>
+                        <div class="task-card-footer">
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-comments-2"></i>10</div>
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-clip"></i>24</div>
+                            <div class="avatar-preview avatar-preview-32">
+                                <a href="">
+                                    <img src="/img/photo-64-2.jpg" alt="">
+                                        </a>
+                            </div>
+                        </div>
+                    </section><!--.task-card-->
+                    
+                </div>
+            </div><!--.tasks-grid-col-->
+            
+            <div class="tasks-grid-col green">
+                <div class="tasks-grid-col-title">Em Progresso <strong>10</strong></div>
+                
+                <div class="sortable">
+                    <section class="box-typical task-card task">
+                        <div class="task-card-photo">
+                            <img src="/img/img-task.jpg" alt="">
+                                </div>
+                        <div class="task-card-in">
+                            <div class="btn-group task-card-menu">
+                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="font-icon-dots-vert-square"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-pencil"></i>Edit</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-archive"></i>Archive</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-trash"></i>Delete</a>
+                                </div>
+                            </div>
+                            <div class="task-card-title">
+                                <a href="">Create new webpage for sales and marketing stuff</a>
+                                <span class="task-card-title-label">(BIG)</span>
+                            </div>
+                            <div class="progress-compact-style">
+                                <progress class="progress" value="25" max="100">
+                                    <div class="progress">
+                                        <span class="progress-bar" style="width: 25%;">25%</span>
+                                    </div>
+                                </progress>
+                                <div class="progress-compact-style-label">37% done</div>
+                            </div>
+                            <div class="task-card-tags">
+                                <a href="" class="label label-light-grey">Default</a>
+                                <a href="" class="label label-light-grey">Primary</a>
+                                <a href="" class="label label-light-grey">Success</a>
+                            </div>
+                        </div>
+                        <div class="task-card-footer">
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-comments-2"></i>10</div>
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-clip"></i>24</div>
+                            <div class="avatar-preview avatar-preview-32">
+                                <a href="">
+                                    <img src="/img/photo-64-2.jpg" alt="">
+                                        </a>
+                            </div>
+                        </div>
+                    </section><!--.task-card-->
+                    
+                    <section class="box-typical task-card task">
+                        <div class="task-card-photo">
+                            <img src="/img/img-task.jpg" alt="">
+                                </div>
+                        <div class="task-card-in">
+                            <div class="btn-group task-card-menu">
+                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="font-icon-dots-vert-square"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-pencil"></i>Edit</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-archive"></i>Archive</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-trash"></i>Delete</a>
+                                </div>
+                            </div>
+                            <div class="task-card-title">
+                                <a href="">Create new webpage for sales and marketing stuff</a>
+                                <span class="task-card-title-label">(BIG)</span>
+                            </div>
+                            <div class="progress-compact-style">
+                                <progress class="progress" value="25" max="100">
+                                    <div class="progress">
+                                        <span class="progress-bar" style="width: 25%;">25%</span>
+                                    </div>
+                                </progress>
+                                <div class="progress-compact-style-label">37% done</div>
+                            </div>
+                            <div class="task-card-tags">
+                                <a href="" class="label label-light-grey">Default</a>
+                                <a href="" class="label label-light-grey">Primary</a>
+                                <a href="" class="label label-light-grey">Success</a>
+                            </div>
+                        </div>
+                        <div class="task-card-footer">
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-comments-2"></i>10</div>
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-clip"></i>24</div>
+                            <div class="avatar-preview avatar-preview-32">
+                                <a href="">
+                                    <img src="/img/photo-64-2.jpg" alt="">
+                                        </a>
+                            </div>
+                        </div>
+                    </section><!--.task-card-->
+                    
+                </div>
+            </div><!--.tasks-grid-col-->
+            
+            <div class="tasks-grid-col">
+                <div class="tasks-grid-col-title">A Confirmar <strong>15</strong></div>
+                
+                <div class="sortable">
+                    <section class="box-typical task-card task">
+                        <div class="task-card-photo">
+                            <img src="/img/img-task.jpg" alt="">
+                                </div>
+                        <div class="task-card-in">
+                            <div class="btn-group task-card-menu">
+                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="font-icon-dots-vert-square"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-pencil"></i>Edit</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-archive"></i>Archive</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-trash"></i>Delete</a>
+                                </div>
+                            </div>
+                            <div class="task-card-title">
+                                <a href="">Create new webpage for sales and marketing stuff</a>
+                                <span class="task-card-title-label">(BIG)</span>
+                            </div>
+                            <div class="progress-compact-style">
+                                <progress class="progress" value="25" max="100">
+                                    <div class="progress">
+                                        <span class="progress-bar" style="width: 25%;">25%</span>
+                                    </div>
+                                </progress>
+                                <div class="progress-compact-style-label">37% done</div>
+                            </div>
+                            <div class="task-card-tags">
+                                <a href="" class="label label-light-grey">Default</a>
+                                <a href="" class="label label-light-grey">Primary</a>
+                                <a href="" class="label label-light-grey">Success</a>
+                            </div>
+                        </div>
+                        <div class="task-card-footer">
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-comments-2"></i>10</div>
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-clip"></i>24</div>
+                            <div class="avatar-preview avatar-preview-32">
+                                <a href="">
+                                    <img src="/img/photo-64-2.jpg" alt="">
+                                        </a>
+                            </div>
+                        </div>
+                    </section><!--.task-card-->
+                    
+                    <section class="box-typical task-card task">
+                        <div class="task-card-photo">
+                            <img src="/img/img-task.jpg" alt="">
+                                </div>
+                        <div class="task-card-in">
+                            <div class="btn-group task-card-menu">
+                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="font-icon-dots-vert-square"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-pencil"></i>Edit</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-archive"></i>Archive</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-trash"></i>Delete</a>
+                                </div>
+                            </div>
+                            <div class="task-card-title">
+                                <a href="">Create new webpage for sales and marketing stuff</a>
+                                <span class="task-card-title-label">(BIG)</span>
+                            </div>
+                            <div class="progress-compact-style">
+                                <progress class="progress" value="25" max="100">
+                                    <div class="progress">
+                                        <span class="progress-bar" style="width: 25%;">25%</span>
+                                    </div>
+                                </progress>
+                                <div class="progress-compact-style-label">37% done</div>
+                            </div>
+                            <div class="task-card-tags">
+                                <a href="" class="label label-light-grey">Default</a>
+                                <a href="" class="label label-light-grey">Primary</a>
+                                <a href="" class="label label-light-grey">Success</a>
+                            </div>
+                        </div>
+                        <div class="task-card-footer">
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-comments-2"></i>10</div>
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-clip"></i>24</div>
+                            <div class="avatar-preview avatar-preview-32">
+                                <a href="">
+                                    <img src="/img/photo-64-2.jpg" alt="">
+                                        </a>
+                            </div>
+                        </div>
+                    </section><!--.task-card-->
+                    
+                </div>
+            </div><!--.tasks-grid-col-->
+            
+            <div class="tasks-grid-col purple">
+                <div class="tasks-grid-col-title">Finalizados <strong>100</strong></div>
+                
+                <div class="sortable">
+                    <section class="box-typical task-card task">
+                        <div class="task-card-photo">
+                            <img src="/img/img-task.jpg" alt="">
+                                </div>
+                        <div class="task-card-in">
+                            <div class="btn-group task-card-menu">
+                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="font-icon-dots-vert-square"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-pencil"></i>Edit</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-archive"></i>Archive</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-trash"></i>Delete</a>
+                                </div>
+                            </div>
+                            <div class="task-card-title">
+                                <a href="">Create new webpage for sales and marketing stuff</a>
+                                <span class="task-card-title-label">(BIG)</span>
+                            </div>
+                            <div class="progress-compact-style">
+                                <progress class="progress" value="25" max="100">
+                                    <div class="progress">
+                                        <span class="progress-bar" style="width: 25%;">25%</span>
+                                    </div>
+                                </progress>
+                                <div class="progress-compact-style-label">37% done</div>
+                            </div>
+                            <div class="task-card-tags">
+                                <a href="" class="label label-light-grey">Default</a>
+                                <a href="" class="label label-light-grey">Primary</a>
+                                <a href="" class="label label-light-grey">Success</a>
+                            </div>
+                        </div>
+                        <div class="task-card-footer">
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-comments-2"></i>10</div>
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-clip"></i>24</div>
+                            <div class="avatar-preview avatar-preview-32">
+                                <a href="">
+                                    <img src="/img/photo-64-2.jpg" alt="">
+                                        </a>
+                            </div>
+                        </div>
+                    </section><!--.task-card-->
+                    
+                    <section class="box-typical task-card task">
+                        <div class="task-card-photo">
+                            <img src="/img/img-task.jpg" alt="">
+                                </div>
+                        <div class="task-card-in">
+                            <div class="btn-group task-card-menu">
+                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="font-icon-dots-vert-square"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-pencil"></i>Edit</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-archive"></i>Archive</a>
+                                    <a class="dropdown-item" href=""><i class="font-icon font-icon-trash"></i>Delete</a>
+                                </div>
+                            </div>
+                            <div class="task-card-title">
+                                <a href="">Create new webpage for sales and marketing stuff</a>
+                                <span class="task-card-title-label">(BIG)</span>
+                            </div>
+                            <div class="progress-compact-style">
+                                <progress class="progress" value="25" max="100">
+                                    <div class="progress">
+                                        <span class="progress-bar" style="width: 25%;">25%</span>
+                                    </div>
+                                </progress>
+                                <div class="progress-compact-style-label">37% done</div>
+                            </div>
+                            <div class="task-card-tags">
+                                <a href="" class="label label-light-grey">Default</a>
+                                <a href="" class="label label-light-grey">Primary</a>
+                                <a href="" class="label label-light-grey">Success</a>
+                            </div>
+                        </div>
+                        <div class="task-card-footer">
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-comments-2"></i>10</div>
+                            <div class="task-card-meta-item"><i class="font-icon font-icon-clip"></i>24</div>
+                            <div class="avatar-preview avatar-preview-32">
+                                <a href="">
+                                    <img src="/img/photo-64-2.jpg" alt="">
+                                        </a>
+                            </div>
+                        </div>
+                    </section><!--.task-card-->
+                    
+                </div>
+            </div><!--.tasks-grid-col-->
+        </div><!--.tasks-grid-->
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+}
+

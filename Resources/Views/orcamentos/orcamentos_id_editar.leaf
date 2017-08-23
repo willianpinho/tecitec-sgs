@@ -1,0 +1,80 @@
+#extend("embeds/base")
+
+#export("title") { Tecitec - Orçamentos }
+
+#export("content") {
+<div class="page-content">
+    <div class="container-fluid">
+        
+        
+        <header class="section-header">
+            <div class="tbl">
+                <div class="tbl-row">
+                    <div class="tbl-cell">
+                        <h3>Orçamentos</h3>
+                        <ol class="breadcrumb breadcrumb-simple">
+                            <li><a href="">Início</a></li>
+                            <li class="active">Orçamentos</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <section class="box-typical scrollable">
+            <header class="box-typical-header">
+                <div class="tbl-row">
+                    <div class="tbl-cell tbl-cell-title">
+                        <h3>Orçamentos Vigentes</h3>
+                    </div>
+                </div>
+            </header>
+            <div class="box-typical-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                            <th>
+                                <td>ID</td>
+                                <td>Cliente</td>
+                                <td>Status</td>
+                                <td>Identificador</td>
+                                <td>Identificador</td>
+                                
+
+                            </th>
+                            <tr>
+                                
+                                <td><a href="">State</a></td>
+                                <td>Text example here lorem ipsum</td>
+                                <td nowrap="nowrap">
+                                    <div class="progress-steps-block">
+                                        <div class="progress-steps">
+                                            <div class="progress-step active"></div>
+                                            <div class="progress-step"></div>
+                                            <div class="progress-step"></div>
+                                        </div>
+                                        <div class="progress-steps-caption">1/3 Steps Complete</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="font-11 color-blue-grey-lighter uppercase">NULL</div>
+                                    0%
+                                </td>
+                                <td>
+                                    <div class="font-11 color-blue-grey-lighter uppercase">Unique values</div>
+                                    72
+                                </td>
+                                <td>
+                                    <div class="font-11 color-blue-grey-lighter uppercase">Most commons</div>
+                                    Florida (13%)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--.box-typical-body-->
+        </section><!--.box-typical-->
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+}
+
