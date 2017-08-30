@@ -89,10 +89,6 @@ final class ConfiguracoesController: ResourceRepresentable {
         drop.get("configuracoes/tipos-usuario/:tipoUsuarioId/editar", handler: editarTiposUsuarioId)
         drop.post("configuracoes/tipos-usuario/:tipoUsuarioId/editar", handler: editTiposUsuarioId)
         drop.post("configuracoes/tipos-usuario/:tipoUsuarioId/deletar", handler: deleteTiposUsuarioId)
-    
-
-
-
 
     }
     
@@ -105,8 +101,17 @@ final class ConfiguracoesController: ResourceRepresentable {
     
     //MARK: Rotas de Carros
     func showCarros(request: Request) throws -> ResponseRepresentable {
+        let carrosObject = try Carro.all()
+        var empty = true
+        if carrosObject.count > 0 {
+            empty = false
+        }
+        
+        let carros = try carrosObject.makeJSON()
+        
         let parameters = try Node(node: [
-            
+            "carros": carros,
+            "empty": empty
             ])
         return try view.make("configuracoes/carros/carros", parameters)
     }
@@ -119,6 +124,14 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func addCarros(request: Request) throws -> ResponseRepresentable {
+        
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let carro = Carro(nome: nome)
+        try carro.save()
+        
         return Response(redirect: "/configuracoes/carros")
     }
     
@@ -143,15 +156,28 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func deleteCarrosId(request: Request) throws -> ResponseRepresentable {
-       
+        let carroId = request.parameters["carroId"]?.int
+        let carro = try Regiao.find(carroId)
+        try carro?.delete()
+        
         return Response(redirect: "/configuracoes/carros")
     }
     
     //MARK: Rotas de Cidades
     func showCidades(request: Request) throws -> ResponseRepresentable {
+        let cidadesObject = try Cidade.all()
+        var empty = true
+        if cidadesObject.count > 0 {
+            empty = false
+        }
+        
+        let cidades = try cidadesObject.makeJSON()
+        
         let parameters = try Node(node: [
-            
+            "cidades": cidades,
+            "empty": empty
             ])
+
         return try view.make("configuracoes/cidades/cidades", parameters)
     }
     
@@ -163,6 +189,18 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func addCidades(request: Request) throws -> ResponseRepresentable {
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        guard let regiao = request.data["regiao"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo regiao")
+        }
+        
+        let regiaoSelecionada = try Regiao.find(regiao.int)
+        let cidade = Cidade(regiao: regiaoSelecionada!, nome: nome)
+        try cidade.save()
+        
         return Response(redirect: "/configuracoes/cidades")
     }
     
@@ -187,6 +225,9 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func deleteCidadesId(request: Request) throws -> ResponseRepresentable {
+        let cidadeId = request.parameters["cidadeId"]?.int
+        let cidade = try Regiao.find(cidadeId)
+        try cidade?.delete()
         
         return Response(redirect: "/configuracoes/cidades")
     }
@@ -283,8 +324,17 @@ final class ConfiguracoesController: ResourceRepresentable {
     
     //MARK: Rotas de Itens
     func showItens(request: Request) throws -> ResponseRepresentable {
+        let itensObject = try ItemTipo.all()
+        var empty = true
+        if itensObject.count > 0 {
+            empty = false
+        }
+        
+        let itens = try itensObject.makeJSON()
+        
         let parameters = try Node(node: [
-            
+            "itens": itens,
+            "empty": empty
             ])
         return try view.make("configuracoes/itens/itens", parameters)
     }
@@ -297,6 +347,13 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func addItens(request: Request) throws -> ResponseRepresentable {
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let item = ItemTipo(nome: nome)
+        try item.save()
+        
         return Response(redirect: "/configuracoes/itens")
     }
     
@@ -321,14 +378,26 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func deleteItensId(request: Request) throws -> ResponseRepresentable {
+        let itemId = request.parameters["itemId"]?.int
+        let item = try Regiao.find(itemId)
+        try item?.delete()
         
         return Response(redirect: "/configuracoes/itens")
     }
     
     //MARK: Rotas de Materiais
     func showMateriais(request: Request) throws -> ResponseRepresentable {
+        let materiaisObject = try Material.all()
+        var empty = true
+        if materiaisObject.count > 0 {
+            empty = false
+        }
+        
+        let materiais = try materiaisObject.makeJSON()
+        
         let parameters = try Node(node: [
-            
+            "materiais": materiais,
+            "empty": empty
             ])
         return try view.make("configuracoes/materiais/materiais", parameters)
     }
@@ -341,6 +410,13 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func addMateriais(request: Request) throws -> ResponseRepresentable {
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let material = Material(nome: nome)
+        try material.save()
+        
         return Response(redirect: "/configuracoes/materiais")
     }
     
@@ -365,14 +441,26 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func deleteMateriaisId(request: Request) throws -> ResponseRepresentable {
+        let materialId = request.parameters["materialId"]?.int
+        let material = try Regiao.find(materialId)
+        try material?.delete()
         
         return Response(redirect: "/configuracoes/materiais")
     }
     
     //MARK: Rotas de Regioes
     func showRegioes(request: Request) throws -> ResponseRepresentable {
+        let regioesObject = try Regiao.all()
+        var empty = true
+        if regioesObject.count > 0 {
+            empty = false
+        }
+        
+        let regioes = try regioesObject.makeJSON()
+        
         let parameters = try Node(node: [
-            
+            "regioes": regioes,
+            "empty": empty
             ])
         return try view.make("configuracoes/regioes/regioes", parameters)
     }
@@ -385,6 +473,13 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func addRegioes(request: Request) throws -> ResponseRepresentable {
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let regiao = Regiao(nome: nome)
+        try regiao.save()
+        
         return Response(redirect: "/configuracoes/regioes")
     }
     
@@ -409,14 +504,26 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func deleteRegioesId(request: Request) throws -> ResponseRepresentable {
+        let regiaoId = request.parameters["regiaoId"]?.int
+        let regiao = try Regiao.find(regiaoId)
+        try regiao?.delete()
         
         return Response(redirect: "/configuracoes/regioes")
     }
     
     //MARK: Rotas de TiposServico
     func showTiposServico(request: Request) throws -> ResponseRepresentable {
+        let tiposServicoObject = try ServicoTipo.all()
+        var empty = true
+        if tiposServicoObject.count > 0 {
+            empty = false
+        }
+        
+        let tiposServico = try tiposServicoObject.makeJSON()
+        
         let parameters = try Node(node: [
-            
+            "tipos_servico": tiposServico,
+            "empty": empty
             ])
         return try view.make("configuracoes/tipos_servico/tipos_servico", parameters)
     }
@@ -429,38 +536,85 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func addTiposServico(request: Request) throws -> ResponseRepresentable {
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        guard let descricao = request.data["descricao"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo descicao")
+        }
+        
+        let tipoServico = ServicoTipo(nome: nome, descricao: descricao)
+        try tipoServico.save()
+        
         return Response(redirect: "/configuracoes/tipos-servico")
     }
     
     func showTiposServicoId(request: Request) throws -> ResponseRepresentable {
+        let tipoServicoId = request.parameters["tipoServicoId"]?.int
+        
+        let tipoServico = try ServicoTipo.makeQuery().filter("id", tipoServicoId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "tipo_servico": tipoServico,
             ])
-        return try view.make("configuracoes/tiposServico/tipos_servico_id", parameters)
+
+        return try view.make("configuracoes/tipos_servico/tipos_servico_id", parameters)
     }
     
     func editarTiposServicoId(request: Request) throws -> ResponseRepresentable {
+        let tipoServicoId = request.parameters["tipoServicoId"]?.int
+        
+        let tipoServico = try ServicoTipo.makeQuery().filter("id", tipoServicoId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "tipo_servico": tipoServico,
             ])
+
         return try view.make("configuracoes/tipos_servico/tipos_servico_id_editar", parameters)
     }
     
     func editTiposServicoId(request: Request) throws -> ResponseRepresentable {
         let tipoServicoId = request.parameters["tipoServicoId"]?.int
         
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        guard let descricao = request.data["descricao"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo descricao")
+        }
+        
+        let tipoServico = try ServicoTipo.find(tipoServicoId)
+        
+        tipoServico?.nome = nome
+        tipoServico?.descricao = descricao
+        
+        try tipoServico?.save()
+
+        
         return Response(redirect: "/configuracoes/tipos-servico/\(tipoServicoId!)")
     }
     
     func deleteTiposServicoId(request: Request) throws -> ResponseRepresentable {
-        
+        let tipoServicoId = request.parameters["tipoServicoId"]?.int
+        let tipoServico = try ServicoTipo.find(tipoServicoId)
+        try tipoServico?.delete()
+
         return Response(redirect: "/configuracoes/tipos-servico")
     }
     
     //MARK: Rotas de TiposStatus
     func showTiposStatus(request: Request) throws -> ResponseRepresentable {
+        let statusObject = try Status.all()
+        var empty = true
+        if statusObject.count > 0 {
+            empty = false
+        }
+        
+        let status = try statusObject.makeJSON()
+        
         let parameters = try Node(node: [
-            
+            "status": status,
+            "empty": empty
             ])
         return try view.make("configuracoes/tipos_status/tipos_status", parameters)
     }
@@ -473,6 +627,13 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func addTiposStatus(request: Request) throws -> ResponseRepresentable {
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let tipoStatus = Status(nome: nome)
+        try tipoStatus.save()
+        
         return Response(redirect: "/configuracoes/tipos-status")
     }
     
@@ -497,14 +658,26 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func deleteTiposStatusId(request: Request) throws -> ResponseRepresentable {
+        let tipoStatusId = request.parameters["tipoStatusId"]?.int
+        let tipoStatus = try Status.find(tipoStatusId)
+        try tipoStatus?.delete()
         
         return Response(redirect: "/configuracoes/tipos-status")
     }
     
     //MARK: Rotas de TiposUsuario
     func showTiposUsuario(request: Request) throws -> ResponseRepresentable {
+        let tiposUsuarioObject = try UsuarioTipo.all()
+        var empty = true
+        if tiposUsuarioObject.count > 0 {
+            empty = false
+        }
+        
+        let tiposUsuario = try tiposUsuarioObject.makeJSON()
+        
         let parameters = try Node(node: [
-            
+            "tipos_usuario": tiposUsuario,
+            "empty": empty
             ])
         return try view.make("configuracoes/tipos_usuario/tipos_usuario", parameters)
     }
@@ -517,6 +690,13 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func addTiposUsuario(request: Request) throws -> ResponseRepresentable {
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let tipoUsuario = UsuarioTipo(nome: nome)
+        try tipoUsuario.save()
+        
         return Response(redirect: "/configuracoes/tipos-usuario")
     }
     
@@ -541,6 +721,9 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func deleteTiposUsuarioId(request: Request) throws -> ResponseRepresentable {
+        let tipoUsuarioId = request.parameters["tipoUsuarioId"]?.int
+        let tipoUsuario = try UsuarioTipo.find(tipoUsuarioId)
+        try tipoUsuario?.delete()
         
         return Response(redirect: "/configuracoes/tipos-usuario")
     }
