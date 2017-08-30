@@ -61,10 +61,10 @@ final class ConfiguracoesController: ResourceRepresentable {
         drop.get("configuracoes/regioes", handler: showRegioes)
         drop.get("configuracoes/regioes/adicionar", handler: adicionarRegioes)
         drop.post("configuracoes/regioes/adicionar", handler: addRegioes)
-        drop.get("configuracoes/regioes/:regiaolId", handler: showRegioesId)
-        drop.get("configuracoes/regioes/:regiaolId/editar", handler: editarRegioesId)
-        drop.post("configuracoes/regioes/:regiaolId/editar", handler: editRegioesId)
-        drop.post("configuracoes/regioes/:regiaolId/deletar", handler: deleteRegioesId)
+        drop.get("configuracoes/regioes/:regiaoId", handler: showRegioesId)
+        drop.get("configuracoes/regioes/:regiaoId/editar", handler: editarRegioesId)
+        drop.post("configuracoes/regioes/:regiaoId/editar", handler: editRegioesId)
+        drop.post("configuracoes/regioes/:regiaoId/deletar", handler: deleteRegioesId)
         
         drop.get("configuracoes/tipos-servico", handler: showTiposServico)
         drop.get("configuracoes/tipos-servico/adicionar", handler: adicionarTiposServico)
@@ -136,28 +136,43 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func showCarrosId(request: Request) throws -> ResponseRepresentable {
+        let carroId = request.parameters["carroId"]?.int
+        
+        let carro = try Carro.makeQuery().filter("id", carroId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "carro": carro,
             ])
         return try view.make("configuracoes/carros/carros_id", parameters)
     }
     
     func editarCarrosId(request: Request) throws -> ResponseRepresentable {
+        let carroId = request.parameters["carroId"]?.int
+        
+        let carro = try Carro.makeQuery().filter("id", carroId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "carro": carro,
             ])
         return try view.make("configuracoes/carros/carros_id_editar", parameters)
     }
     
     func editCarrosId(request: Request) throws -> ResponseRepresentable {
         let carroId = request.parameters["carroId"]?.int
+        
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let carro = try Carro.find(carroId)
+        carro?.nome = nome
+        
+        try carro?.save()
 
         return Response(redirect: "/configuracoes/carros/\(carroId!)")
     }
     
     func deleteCarrosId(request: Request) throws -> ResponseRepresentable {
         let carroId = request.parameters["carroId"]?.int
-        let carro = try Regiao.find(carroId)
+        let carro = try Carro.find(carroId)
         try carro?.delete()
         
         return Response(redirect: "/configuracoes/carros")
@@ -205,15 +220,21 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func showCidadesId(request: Request) throws -> ResponseRepresentable {
+        let cidadeId = request.parameters["cidadeId"]?.int
+        
+        let cidade = try Carro.makeQuery().filter("id", cidadeId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "cidade": cidade,
             ])
         return try view.make("configuracoes/cidades/cidades_id", parameters)
     }
     
     func editarCidadesId(request: Request) throws -> ResponseRepresentable {
+        let cidadeId = request.parameters["cidadeId"]?.int
+        
+        let cidade = try Carro.makeQuery().filter("id", cidadeId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "cidade": cidade,
             ])
         return try view.make("configuracoes/cidades/cidades_id_editar", parameters)
     }
@@ -358,15 +379,22 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func showItensId(request: Request) throws -> ResponseRepresentable {
+        let itemId = request.parameters["itemId"]?.int
+        
+        let item = try ItemTipo.makeQuery().filter("id", itemId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "item": item,
             ])
+
         return try view.make("configuracoes/itens/itens_id", parameters)
     }
     
     func editarItensId(request: Request) throws -> ResponseRepresentable {
+        let itemId = request.parameters["itemId"]?.int
+        
+        let item = try ItemTipo.makeQuery().filter("id", itemId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "item": item,
             ])
         return try view.make("configuracoes/itens/itens_id_editar", parameters)
     }
@@ -421,15 +449,21 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func showMateriaisId(request: Request) throws -> ResponseRepresentable {
+        let materialId = request.parameters["materialId"]?.int
+        
+        let material = try Material.makeQuery().filter("id", materialId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "material": material,
             ])
         return try view.make("configuracoes/materiais/materiais_id", parameters)
     }
     
     func editarMateriaisId(request: Request) throws -> ResponseRepresentable {
+        let materialId = request.parameters["materialId"]?.int
+        
+        let material = try Material.makeQuery().filter("id", materialId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "material": material,
             ])
         return try view.make("configuracoes/materiais/materiais_id_editar", parameters)
     }
@@ -484,21 +518,37 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func showRegioesId(request: Request) throws -> ResponseRepresentable {
+        let regiaoId = request.parameters["regiaoId"]?.int
+        
+        let regiao = try Regiao.makeQuery().filter("id", regiaoId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "regiao": regiao,
             ])
         return try view.make("configuracoes/regioes/regioes_id", parameters)
     }
     
     func editarRegioesId(request: Request) throws -> ResponseRepresentable {
+        let regiaoId = request.parameters["regiaoId"]?.int
+        
+        let regiao = try Regiao.makeQuery().filter("id", regiaoId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "regiao": regiao,
             ])
         return try view.make("configuracoes/regioes/regioes_id_editar", parameters)
     }
     
     func editRegioesId(request: Request) throws -> ResponseRepresentable {
         let regiaoId = request.parameters["regiaoId"]?.int
+        
+        
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let regiao = try Regiao.find(regiaoId)
+        regiao?.nome = nome
+        
+        try regiao?.save()
         
         return Response(redirect: "/configuracoes/regioes/\(regiaoId!)")
     }
@@ -638,15 +688,21 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func showTiposStatusId(request: Request) throws -> ResponseRepresentable {
+        let tipoStatusId = request.parameters["tipoStatusId"]?.int
+        
+        let tipoStatus = try Regiao.makeQuery().filter("id", tipoStatusId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "tipo_status": tipoStatus,
             ])
         return try view.make("configuracoes/tipos_status/tipos_status_id", parameters)
     }
     
     func editarTiposStatusId(request: Request) throws -> ResponseRepresentable {
+        let tipoStatusId = request.parameters["tipoStatusId"]?.int
+        
+        let tipoStatus = try Regiao.makeQuery().filter("id", tipoStatusId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "tipo_status": tipoStatus,
             ])
         return try view.make("configuracoes/tipos_status/tipos_status_id_editar", parameters)
     }
@@ -701,15 +757,21 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func showTiposUsuarioId(request: Request) throws -> ResponseRepresentable {
+        let tipoUsuarioId = request.parameters["tipoUsuarioId"]?.int
+        
+        let tipoUsuario = try Regiao.makeQuery().filter("id", tipoUsuarioId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "tipo_usuario": tipoUsuario,
             ])
         return try view.make("configuracoes/tipos_usuario/tipos_usuario_id", parameters)
     }
     
     func editarTiposUsuarioId(request: Request) throws -> ResponseRepresentable {
+        let tipoUsuarioId = request.parameters["tipoUsuarioId"]?.int
+        
+        let tipoUsuario = try Regiao.makeQuery().filter("id", tipoUsuarioId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "tipo_usuario": tipoUsuario,
             ])
         return try view.make("configuracoes/tipos_usuario/tipos_usuario_id_editar", parameters)
     }
