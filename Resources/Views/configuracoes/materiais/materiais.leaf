@@ -1,25 +1,69 @@
 #extend("embeds/base")
 
-#export("title") { Tecitec - Clientes }
+#export("title") { Tecitec - Materials }
 
 #export("content") {
 <div class="page-content">
     <div class="container-fluid">
-        
-        
         <header class="section-header">
             <div class="tbl">
                 <div class="tbl-row">
                     <div class="tbl-cell">
-                        <h3>Clientes</h3>
+                        <h3>Materiais</h3>
                         <ol class="breadcrumb breadcrumb-simple">
-                            <li><a href="">Tecitec</a></li>
-                            <li class="active">Clientes</li>
+                            <li><a href="/">Tecitec</a></li>
+                            <li><a href="/configuracoes">Configurações</a></li>
+                            <li class="active">Materiais</li>
                         </ol>
                     </div>
                 </div>
             </div>
-        </header>    </div><!--.container-fluid-->
+        </header>
+        
+        <section class="box-typical">
+            <header class="box-typical-header">
+                <div class="tbl-row">
+                    <div class="tbl-cell tbl-cell-title">
+                        <h3>Todas as Materiais</h3>
+                    </div>
+                    
+                    <div class="tbl-cell tbl-cell-action-bordered">
+                        <form id="" role="" autocomplete="on" action="/configuracoes/materiais/adicionar" method="get">
+                            <button type="submit" class="action-btn"><i class="font-icon font-icon-plus"></i></button>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </header>
+            <div class="box-typical-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Material</th>
+                                <th><i class="font-icon font-icon-re"></i></th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            #loop(materiais, "material") {
+                            <tr>
+                                <td>#(material.id)</td>
+                                <td>#(material.nome)</a></td>
+                                <td><a href="/configuracoes/materiais/#(material.id)">Ver Detalhes</a></td>
+                            </tr>
+                            }
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--.box-typical-body-->
+            
+            
+        </section><!--.box-typical-->
+        
+    </div><!--.container-fluid-->
 </div><!--.page-content-->
 }
 

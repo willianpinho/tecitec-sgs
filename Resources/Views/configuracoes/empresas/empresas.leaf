@@ -35,21 +35,6 @@
                     </div>
                 </div>
             </header>
-            #if(empty) {
-            <div class="container-fluid">
-                <div class="box-typical box-typical-full-height">
-                    <div class="add-customers-screen tbl">
-                        <div class="add-customers-screen-in">
-                            <div class="add-customers-screen-user">
-                                <i class="font-icon font-icon-user"></i>
-                            </div>
-                            <h2>Não há empresas cadastradas</h2>
-                            <a href="/configuracoes/empresas/adicionar" class="btn">Adicionar empresa</a>
-                        </div>
-                    </div>
-                </div><!--.box-typical-->
-            </div><!--.container-fluid-->
-            } ##else() {
             <div class="box-typical-body">
                 <div class="table-responsive">
                     <table class="table table-hover">
@@ -76,8 +61,6 @@
                     </table>
                 </div>
             </div><!--.box-typical-body-->
-            
-            }
             
             
         </section><!--.box-typical-->

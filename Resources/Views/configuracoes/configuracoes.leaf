@@ -107,7 +107,7 @@
                             <i class="fa fa-dashboard color-blue"></i>
                         </div>
                         <div class="widget-simple-sm-bottom">
-                            <a href="//configuracoes/tipos-status">Tipos de Status</a>
+                            <a href="/configuracoes/tipos-status">Tipos de Status</a>
                         </div>
                     </section><!--.widget-simple-sm-->
                 </div>
@@ -118,7 +118,7 @@
                             <i class="fa fa-users color-blue"></i>
                         </div>
                         <div class="widget-simple-sm-bottom">
-                            <a href="/configuracoes/tipos-usuarios">Tipos de Usuários</a>
+                            <a href="/configuracoes/tipos-usuario">Tipos de Usuários</a>
                         </div>
                     </section><!--.widget-simple-sm-->
                 </div>

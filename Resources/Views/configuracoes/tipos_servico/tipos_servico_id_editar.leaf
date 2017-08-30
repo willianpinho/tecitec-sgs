@@ -1,25 +1,59 @@
 #extend("embeds/base")
 
-#export("title") { Tecitec - Clientes }
+#export("title") { Tecitec - Editar Tipos de Serviço }
 
 #export("content") {
 <div class="page-content">
     <div class="container-fluid">
-        
-        
         <header class="section-header">
             <div class="tbl">
                 <div class="tbl-row">
                     <div class="tbl-cell">
                         <h3>Clientes</h3>
                         <ol class="breadcrumb breadcrumb-simple">
-                            <li><a href="">Tecitec</a></li>
-                            <li class="active">Clientes</li>
+                            <li><a href="/">Tecitec</a></li>
+                            <li><a href="/configuracoes">Configurações</a></li>
+                            <li><a href="/configuracoes/tipos-servico">Tipos de Serviço</a></li>
+                            <li class="active">Editar Tipo de Serviço #(tipo_servico.nome)</li>
                         </ol>
                     </div>
                 </div>
             </div>
-        </header>    </div><!--.container-fluid-->
+        </header>
+        
+        <div class="box-typical box-typical-padding">
+            <ul class=" ">
+                <form id="form-group" role="form" autocomplete="on" action="/configuracoes/tipos-servico/#(tipo_servico.id)/deletar" method="post">
+                    <li><button type="submit" class="btn btn-inline pull-right btn-danger-outline">Deletar Tipo de Serviço</button></li>
+                </form>
+                
+            </ul>
+            <h5 class="m-t-lg with-border">Editar Tipo de Serviço</h5>
+            <form id="form-group" role="form" autocomplete="on" action="/configuracoes/tipos-servico/#(tipo_servico.id)/editar" method="post">
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Nome</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><input type="text" class="form-control" id="" placeholder="" value="#(tipo_servico.nome)" name="nome" /></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Descrição</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><input type="text" class="form-control" id="" placeholder="" value="#(tipo_servico.descricao)" name="descricao" /></p>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn pull-right btn-inline btn-warning">Editar Tipo de Serviço</button>
+                        
+                    </div>
+                </div>
+                
+                
+            </form>
+        </div><!--.box-typical-->
+    </div><!--.container-fluid-->
 </div><!--.page-content-->
 }
 
