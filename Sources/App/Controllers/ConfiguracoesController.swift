@@ -193,8 +193,17 @@ final class ConfiguracoesController: ResourceRepresentable {
     
     //MARK: Rotas de Empresas
     func showEmpresas(request: Request) throws -> ResponseRepresentable {
+        let empresasObject = try Empresa.all()
+        var empty = true
+        if empresasObject.count > 0 {
+            empty = false
+        }
+        
+        let empresas = try empresasObject.makeJSON()
+        
         let parameters = try Node(node: [
-            
+            "empresas": empresas,
+            "empty": empty
             ])
         return try view.make("configuracoes/empresas/empresas", parameters)
     }
@@ -207,30 +216,67 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func addEmpresas(request: Request) throws -> ResponseRepresentable {
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        guard let cnpj = request.data["cnpj"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo cnpj")
+        }
+        
+        let empresa = Empresa(nome: nome, cnpj: cnpj)
+        try empresa.save()
+        
         return Response(redirect: "/configuracoes/empresas")
     }
     
     func showEmpresasId(request: Request) throws -> ResponseRepresentable {
+        let empresaId = request.parameters["empresaId"]?.int
+
+        let empresa = try Empresa.makeQuery().filter("id", empresaId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "empresa": empresa,
             ])
         return try view.make("configuracoes/empresas/empresas_id", parameters)
     }
     
     func editarEmpresasId(request: Request) throws -> ResponseRepresentable {
+        let empresaId = request.parameters["empresaId"]?.int
+        
+        let empresa = try Empresa.makeQuery().filter("id", empresaId).first()?.makeJSON()
         let parameters = try Node(node: [
-            
+            "empresa": empresa,
             ])
         return try view.make("configuracoes/empresas/empresas_id_editar", parameters)
     }
     
     func editEmpresasId(request: Request) throws -> ResponseRepresentable {
+        
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        guard let cnpj = request.data["cnpj"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo cnpj")
+        }
+        
         let empresaId = request.parameters["empresaId"]?.int
         
+        let empresa = try Empresa.find(empresaId)
+        
+        empresa?.nome = nome
+        empresa?.cnpj = cnpj
+        
+        try empresa?.save()
+
         return Response(redirect: "/configuracoes/empresas/\(empresaId!)")
     }
     
     func deleteEmpresasId(request: Request) throws -> ResponseRepresentable {
+        let empresaId = request.parameters["empresaId"]?.int
+
+        let empresa = try Empresa.find(empresaId)
+        try empresa?.delete()
         
         return Response(redirect: "/configuracoes/empresas")
     }

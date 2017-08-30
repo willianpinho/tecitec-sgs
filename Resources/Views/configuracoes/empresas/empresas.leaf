@@ -1,25 +1,88 @@
 #extend("embeds/base")
 
-#export("title") { Tecitec - Clientes }
+#export("title") { Tecitec - Empresas }
 
 #export("content") {
 <div class="page-content">
     <div class="container-fluid">
-        
-        
         <header class="section-header">
             <div class="tbl">
                 <div class="tbl-row">
                     <div class="tbl-cell">
-                        <h3>Clientes</h3>
+                        <h3>Empresas</h3>
                         <ol class="breadcrumb breadcrumb-simple">
-                            <li><a href="">Tecitec</a></li>
-                            <li class="active">Clientes</li>
+                            <li><a href="/">Tecitec</a></li>
+                            <li><a href="/configuracoes">Configurações</a></li>
+                            <li class="active">Empresas</li>
                         </ol>
                     </div>
                 </div>
             </div>
-        </header>    </div><!--.container-fluid-->
+        </header>
+        
+        <section class="box-typical">
+            <header class="box-typical-header">
+                <div class="tbl-row">
+                    <div class="tbl-cell tbl-cell-title">
+                        <h3>Todas as Empresas</h3>
+                    </div>
+                    
+                    <div class="tbl-cell tbl-cell-action-bordered">
+                        <form id="" role="" autocomplete="on" action="/configuracoes/empresas/adicionar" method="get">
+                            <button type="submit" class="action-btn"><i class="font-icon font-icon-plus"></i></button>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </header>
+            #if(empty) {
+            <div class="container-fluid">
+                <div class="box-typical box-typical-full-height">
+                    <div class="add-customers-screen tbl">
+                        <div class="add-customers-screen-in">
+                            <div class="add-customers-screen-user">
+                                <i class="font-icon font-icon-user"></i>
+                            </div>
+                            <h2>Não há empresas cadastradas</h2>
+                            <a href="/configuracoes/empresas/adicionar" class="btn">Adicionar empresa</a>
+                        </div>
+                    </div>
+                </div><!--.box-typical-->
+            </div><!--.container-fluid-->
+            } ##else() {
+            <div class="box-typical-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Empresa</th>
+                                <th>CNPJ</th>
+                                <th><i class="font-icon font-icon-re"></i></th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            #loop(empresas, "empresa") {
+                            <tr>
+                                <td>#(empresa.id)</td>
+                                <td>#(empresa.nome)</a></td>
+                                <td>#(empresa.cnpj)</td>
+                                <td><a href="/configuracoes/empresas/#(empresa.id)">Ver Detalhes</a></td>
+                            </tr>
+                            }
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--.box-typical-body-->
+            
+            }
+            
+            
+        </section><!--.box-typical-->
+        
+    </div><!--.container-fluid-->
 </div><!--.page-content-->
 }
 
