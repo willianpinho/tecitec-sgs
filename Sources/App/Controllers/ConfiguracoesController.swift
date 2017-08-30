@@ -759,7 +759,7 @@ final class ConfiguracoesController: ResourceRepresentable {
     func showTiposUsuarioId(request: Request) throws -> ResponseRepresentable {
         let tipoUsuarioId = request.parameters["tipoUsuarioId"]?.int
         
-        let tipoUsuario = try Regiao.makeQuery().filter("id", tipoUsuarioId).first()?.makeJSON()
+        let tipoUsuario = try UsuarioTipo.makeQuery().filter("id", tipoUsuarioId).first()?.makeJSON()
         let parameters = try Node(node: [
             "tipo_usuario": tipoUsuario,
             ])
@@ -769,7 +769,7 @@ final class ConfiguracoesController: ResourceRepresentable {
     func editarTiposUsuarioId(request: Request) throws -> ResponseRepresentable {
         let tipoUsuarioId = request.parameters["tipoUsuarioId"]?.int
         
-        let tipoUsuario = try Regiao.makeQuery().filter("id", tipoUsuarioId).first()?.makeJSON()
+        let tipoUsuario = try UsuarioTipo.makeQuery().filter("id", tipoUsuarioId).first()?.makeJSON()
         let parameters = try Node(node: [
             "tipo_usuario": tipoUsuario,
             ])
@@ -778,6 +778,15 @@ final class ConfiguracoesController: ResourceRepresentable {
     
     func editTiposUsuarioId(request: Request) throws -> ResponseRepresentable {
         let tipoUsuarioId = request.parameters["tipoUsuarioId"]?.int
+        
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let tipoUsuario = try UsuarioTipo.find(tipoUsuarioId)
+        tipoUsuario?.nome = nome
+        
+        try tipoUsuario?.save()
         
         return Response(redirect: "/configuracoes/tipos-usuario/\(tipoUsuarioId!)")
     }

@@ -69,7 +69,7 @@ extension ItemTipo: Preparation {
 extension ItemTipo: JSONConvertible {
     convenience init(json: JSON) throws {
         try self.init(
-            nome: json.get("nome")
+            nome: json.get("nome"   )
             
         )
     }

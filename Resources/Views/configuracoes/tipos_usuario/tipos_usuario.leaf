@@ -41,17 +41,17 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Tipo de Usuários</th>
+                                <th>Tipo de Usuário</th>
                                 <th><i class="font-icon font-icon-re"></i></th>
                                 
                             </tr>
                         </thead>
                         <tbody>
-                            #loop(tipos_usuarios, "tipo_usuario") {
+                            #loop(tipos_usuario, "tipo_usuario") {
                             <tr>
                                 <td>#(tipo_usuario.id)</td>
                                 <td>#(tipo_usuario.nome)</a></td>
-                                <td><a href="/configuracoes/tipos-usuarios/#(tipo_usuario.id)">Ver Detalhes</a></td>
+                                <td><a href="/configuracoes/tipos-usuario/#(tipo_usuario.id)">Ver Detalhes</a></td>
                             </tr>
                             }
                             
