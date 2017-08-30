@@ -83,8 +83,9 @@ extension Cidade: JSONConvertible {
     func makeJSON() throws -> JSON {
         var json = JSON()
         try json.set("id", id)
-        try json.set("regiao_id", regiao)
         try json.set("nome", nome)
+        let currentRegiao = try Regiao.makeQuery().filter("id", regiao?.int).first()?.makeJSON()
+        try json.set("regiao", currentRegiao)
         
         return json
     }

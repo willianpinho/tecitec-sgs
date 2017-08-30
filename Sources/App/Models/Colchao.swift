@@ -102,11 +102,13 @@ extension Colchao: JSONConvertible {
     func makeJSON() throws -> JSON {
         var json = JSON()
         try json.set("id", id)
-        try json.set("item_tipo_id", tipoItem)
         try json.set("largura", largura)
         try json.set("altura", altura)
         try json.set("comprimento", comprimento)
-        try json.set("material_id", material)
+        let currentItemTipo = try ItemTipo.makeQuery().filter("id", tipoItem?.int).first()?.makeJSON()
+        try json.set("item_tipo", currentItemTipo)
+        let currentMaterial = try Material.makeQuery().filter("id", material?.int).first()?.makeJSON()
+        try json.set("material", currentMaterial)
         
         return json
     }

@@ -96,10 +96,13 @@ extension Servico: JSONConvertible {
     func makeJSON() throws -> JSON {
         var json = JSON()
         try json.set("id", id)
-        try json.set("tipo_servico_id", tipoServico)
-        try json.set("item_id", item)
         try json.set("custo", custo)
         try json.set("preco", preco)
+        
+        let currentItem = try ItemTipo.makeQuery().filter("id", item?.int).first()?.makeJSON()
+        try json.set("item", currentItem)
+        let currentServico = try ServicoTipo.makeQuery().filter("id", tipoServico?.int).first()?.makeJSON()
+        try json.set("tipo_servico", currentServico)
 
         return json
     }

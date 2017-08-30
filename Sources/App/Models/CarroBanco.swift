@@ -90,9 +90,12 @@ extension CarroBanco: JSONConvertible {
     func makeJSON() throws -> JSON {
         var json = JSON()
         try json.set("id", id)
-        try json.set("item_tipo_id", tipoItem)
-        try json.set("carro_id", carro)
-        try json.set("material_id", material)
+        let currentItemTipo = try ItemTipo.makeQuery().filter("id", tipoItem?.int).first()?.makeJSON()
+        try json.set("item_tipo", currentItemTipo)
+        let currentCarro = try Carro.makeQuery().filter("id", carro?.int).first()?.makeJSON()
+        try json.set("carro", currentCarro)
+        let currentMaterial = try Material.makeQuery().filter("id", material?.int).first()?.makeJSON()
+        try json.set("material", currentMaterial)
         
         return json
     }
