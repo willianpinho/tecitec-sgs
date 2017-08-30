@@ -197,8 +197,10 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func adicionarCidades(request: Request) throws -> ResponseRepresentable {
+        
+        let regioes = try Regiao.all().makeJSON()
         let parameters = try Node(node: [
-            
+            "regioes", regioes
             ])
         return try view.make("configuracoes/cidades/cidades_adicionar", parameters)
     }
@@ -208,11 +210,12 @@ final class ConfiguracoesController: ResourceRepresentable {
             throw Abort(.badRequest, reason: "Sem campo nome")
         }
         
-        guard let regiao = request.data["regiao"]?.string else {
+        guard let regiao = request.data["regiao_id"]?.string else {
             throw Abort(.badRequest, reason: "Sem campo regiao")
         }
         
         let regiaoSelecionada = try Regiao.find(regiao.int)
+        
         let cidade = Cidade(regiao: regiaoSelecionada!, nome: nome)
         try cidade.save()
         
@@ -247,7 +250,7 @@ final class ConfiguracoesController: ResourceRepresentable {
     
     func deleteCidadesId(request: Request) throws -> ResponseRepresentable {
         let cidadeId = request.parameters["cidadeId"]?.int
-        let cidade = try Regiao.find(cidadeId)
+        let cidade = try Cidade.find(cidadeId)
         try cidade?.delete()
         
         return Response(redirect: "/configuracoes/cidades")
@@ -402,12 +405,22 @@ final class ConfiguracoesController: ResourceRepresentable {
     func editItensId(request: Request) throws -> ResponseRepresentable {
         let itemId = request.parameters["itemId"]?.int
         
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let item = try ItemTipo.find(itemId)
+        item?.nome = nome
+        
+        try item?.save()
+        
+        
         return Response(redirect: "/configuracoes/itens/\(itemId!)")
     }
     
     func deleteItensId(request: Request) throws -> ResponseRepresentable {
         let itemId = request.parameters["itemId"]?.int
-        let item = try Regiao.find(itemId)
+        let item = try ItemTipo.find(itemId)
         try item?.delete()
         
         return Response(redirect: "/configuracoes/itens")
@@ -471,12 +484,21 @@ final class ConfiguracoesController: ResourceRepresentable {
     func editMateriaisId(request: Request) throws -> ResponseRepresentable {
         let materialId = request.parameters["materialId"]?.int
         
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let material = try Material.find(materialId)
+        
+        material?.nome = nome
+        try material?.save()
+        
         return Response(redirect: "/configuracoes/materiais/\(materialId!)")
     }
     
     func deleteMateriaisId(request: Request) throws -> ResponseRepresentable {
         let materialId = request.parameters["materialId"]?.int
-        let material = try Regiao.find(materialId)
+        let material = try Material.find(materialId)
         try material?.delete()
         
         return Response(redirect: "/configuracoes/materiais")
@@ -663,7 +685,7 @@ final class ConfiguracoesController: ResourceRepresentable {
         let status = try statusObject.makeJSON()
         
         let parameters = try Node(node: [
-            "status": status,
+            "tipos_status": status,
             "empty": empty
             ])
         return try view.make("configuracoes/tipos_status/tipos_status", parameters)
@@ -690,7 +712,7 @@ final class ConfiguracoesController: ResourceRepresentable {
     func showTiposStatusId(request: Request) throws -> ResponseRepresentable {
         let tipoStatusId = request.parameters["tipoStatusId"]?.int
         
-        let tipoStatus = try Regiao.makeQuery().filter("id", tipoStatusId).first()?.makeJSON()
+        let tipoStatus = try Status.makeQuery().filter("id", tipoStatusId).first()?.makeJSON()
         let parameters = try Node(node: [
             "tipo_status": tipoStatus,
             ])
@@ -700,7 +722,7 @@ final class ConfiguracoesController: ResourceRepresentable {
     func editarTiposStatusId(request: Request) throws -> ResponseRepresentable {
         let tipoStatusId = request.parameters["tipoStatusId"]?.int
         
-        let tipoStatus = try Regiao.makeQuery().filter("id", tipoStatusId).first()?.makeJSON()
+        let tipoStatus = try Status.makeQuery().filter("id", tipoStatusId).first()?.makeJSON()
         let parameters = try Node(node: [
             "tipo_status": tipoStatus,
             ])
@@ -709,6 +731,16 @@ final class ConfiguracoesController: ResourceRepresentable {
     
     func editTiposStatusId(request: Request) throws -> ResponseRepresentable {
         let tipoStatusId = request.parameters["tipoStatusId"]?.int
+        
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let status = try Status.find(tipoStatusId)
+        status?.nome = nome
+        
+        try status?.save()
+        
         
         return Response(redirect: "/configuracoes/tipos-status/\(tipoStatusId!)")
     }
