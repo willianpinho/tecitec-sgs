@@ -89,7 +89,16 @@ final class ConfiguracoesController: ResourceRepresentable {
         drop.get("configuracoes/tipos-usuario/:tipoUsuarioId/editar", handler: editarTiposUsuarioId)
         drop.post("configuracoes/tipos-usuario/:tipoUsuarioId/editar", handler: editTiposUsuarioId)
         drop.post("configuracoes/tipos-usuario/:tipoUsuarioId/deletar", handler: deleteTiposUsuarioId)
+        
+        drop.get("configuracoes/tipos-cliente", handler: showTiposCliente)
+        drop.get("configuracoes/tipos-cliente/adicionar", handler: adicionarTiposCliente)
+        drop.post("configuracoes/tipos-cliente/adicionar", handler: addTiposCliente)
+        drop.get("configuracoes/tipos-cliente/:tipoClienteId", handler: showTiposClienteId)
+        drop.get("configuracoes/tipos-cliente/:tipoClienteId/editar", handler: editarTiposClienteId)
+        drop.post("configuracoes/tipos-cliente/:tipoClienteId/editar", handler: editTiposClienteId)
+        drop.post("configuracoes/tipos-cliente/:tipoClienteId/deletar", handler: deleteTiposClienteId)
 
+        
     }
     
     func index(request: Request) throws -> ResponseRepresentable {
@@ -197,11 +206,13 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func adicionarCidades(request: Request) throws -> ResponseRepresentable {
-        
         let regioes = try Regiao.all().makeJSON()
+        
         let parameters = try Node(node: [
-            "regioes", regioes
+            "regioes": regioes,
+    
             ])
+        
         return try view.make("configuracoes/cidades/cidades_adicionar", parameters)
     }
     
@@ -225,7 +236,7 @@ final class ConfiguracoesController: ResourceRepresentable {
     func showCidadesId(request: Request) throws -> ResponseRepresentable {
         let cidadeId = request.parameters["cidadeId"]?.int
         
-        let cidade = try Carro.makeQuery().filter("id", cidadeId).first()?.makeJSON()
+        let cidade = try Cidade.makeQuery().filter("id", cidadeId).first()?.makeJSON()
         let parameters = try Node(node: [
             "cidade": cidade,
             ])
@@ -235,15 +246,35 @@ final class ConfiguracoesController: ResourceRepresentable {
     func editarCidadesId(request: Request) throws -> ResponseRepresentable {
         let cidadeId = request.parameters["cidadeId"]?.int
         
-        let cidade = try Carro.makeQuery().filter("id", cidadeId).first()?.makeJSON()
+        let cidade = try Cidade.makeQuery().filter("id", cidadeId).first()?.makeJSON()
+        
+        let regioes = try Regiao.all().makeJSON()
+
         let parameters = try Node(node: [
             "cidade": cidade,
+            "regioes": regioes
             ])
         return try view.make("configuracoes/cidades/cidades_id_editar", parameters)
     }
     
     func editCidadesId(request: Request) throws -> ResponseRepresentable {
         let cidadeId = request.parameters["cidadeId"]?.int
+        
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        guard let regiao = request.data["regiao_id"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo regiao")
+        }
+        let regiaoSelecionada = try Regiao.find(regiao.int)
+
+        let cidade = try Cidade.find(cidadeId)
+        cidade?.nome = nome
+        cidade?.regiao = regiaoSelecionada?.id
+        
+        try cidade?.save()
+
         
         return Response(redirect: "/configuracoes/cidades/\(cidadeId!)")
     }
@@ -824,6 +855,84 @@ final class ConfiguracoesController: ResourceRepresentable {
     }
     
     func deleteTiposUsuarioId(request: Request) throws -> ResponseRepresentable {
+        let tipoUsuarioId = request.parameters["tipoUsuarioId"]?.int
+        let tipoUsuario = try UsuarioTipo.find(tipoUsuarioId)
+        try tipoUsuario?.delete()
+        
+        return Response(redirect: "/configuracoes/tipos-usuario")
+    }
+    
+    //MARK: Rotas de TiposCliente
+    func showTiposCliente(request: Request) throws -> ResponseRepresentable {
+        let tiposUsuarioObject = try UsuarioTipo.all()
+        var empty = true
+        if tiposUsuarioObject.count > 0 {
+            empty = false
+        }
+        
+        let tiposUsuario = try tiposUsuarioObject.makeJSON()
+        
+        let parameters = try Node(node: [
+            "tipos_usuario": tiposUsuario,
+            "empty": empty
+            ])
+        return try view.make("configuracoes/tipos_usuario/tipos_usuario", parameters)
+    }
+    
+    func adicionarTiposCliente(request: Request) throws -> ResponseRepresentable {
+        let parameters = try Node(node: [
+            
+            ])
+        return try view.make("configuracoes/tipos_usuario/tipos_usuario_adicionar", parameters)
+    }
+    
+    func addTiposCliente(request: Request) throws -> ResponseRepresentable {
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let tipoUsuario = UsuarioTipo(nome: nome)
+        try tipoUsuario.save()
+        
+        return Response(redirect: "/configuracoes/tipos-usuario")
+    }
+    
+    func showTiposClienteId(request: Request) throws -> ResponseRepresentable {
+        let tipoUsuarioId = request.parameters["tipoUsuarioId"]?.int
+        
+        let tipoUsuario = try UsuarioTipo.makeQuery().filter("id", tipoUsuarioId).first()?.makeJSON()
+        let parameters = try Node(node: [
+            "tipo_usuario": tipoUsuario,
+            ])
+        return try view.make("configuracoes/tipos_usuario/tipos_usuario_id", parameters)
+    }
+    
+    func editarTiposClienteId(request: Request) throws -> ResponseRepresentable {
+        let tipoUsuarioId = request.parameters["tipoUsuarioId"]?.int
+        
+        let tipoUsuario = try UsuarioTipo.makeQuery().filter("id", tipoUsuarioId).first()?.makeJSON()
+        let parameters = try Node(node: [
+            "tipo_usuario": tipoUsuario,
+            ])
+        return try view.make("configuracoes/tipos_usuario/tipos_usuario_id_editar", parameters)
+    }
+    
+    func editTiposClienteId(request: Request) throws -> ResponseRepresentable {
+        let tipoUsuarioId = request.parameters["tipoUsuarioId"]?.int
+        
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        let tipoUsuario = try UsuarioTipo.find(tipoUsuarioId)
+        tipoUsuario?.nome = nome
+        
+        try tipoUsuario?.save()
+        
+        return Response(redirect: "/configuracoes/tipos-usuario/\(tipoUsuarioId!)")
+    }
+    
+    func deleteTiposClienteId(request: Request) throws -> ResponseRepresentable {
         let tipoUsuarioId = request.parameters["tipoUsuarioId"]?.int
         let tipoUsuario = try UsuarioTipo.find(tipoUsuarioId)
         try tipoUsuario?.delete()

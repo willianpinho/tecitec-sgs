@@ -1,6 +1,6 @@
 #extend("embeds/base")
 
-#export("title") { Tecitec - Editar Empresa #(empresa.nome)}
+#export("title") { Tecitec - Empresa #(empresa.nome)}
 
 #export("content") {
 <div class="page-content">

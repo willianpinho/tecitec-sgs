@@ -30,6 +30,8 @@
         <link rel="stylesheet" href="/css/lib/font-awesome/font-awesome.min.css" />
         <link rel="stylesheet" href="/css/lib/bootstrap/bootstrap.min.css" />
         <link rel="stylesheet" href="/css/main.css" />
+        <link rel="stylesheet" href="/css/separate/vendor/select2.min.css" />
+
     </head>
     <body class="with-side-menu-compact">
         #embed("embeds/header")
