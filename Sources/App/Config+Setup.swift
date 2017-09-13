@@ -29,7 +29,6 @@ extension Config {
         preparations.append(Material.self)
         preparations.append(Orcamento.self)
         preparations.append(OrcamentoItem.self)
-        preparations.append(Perfil.self)
         preparations.append(Poltrona.self)
         preparations.append(Regiao.self)
         preparations.append(Servico.self)
