@@ -7,44 +7,45 @@
                 <span class="lbl">Início</span>
             </a>
         </li>
+        
         <li class="blue">
-            <a href="/calendario">
+            <a href="/calendario" style="pointer-events: none; cursor: default;">
                 <i class="font-icon font-icon-calend"></i>
                 <span class="lbl">Calendário</span>
             </a>
         </li>
         <li class="green">
-            <a href="/orcamentos">
+            <a href="/orcamentos" style="pointer-events: none; cursor: default;">
                 <i class="font-icon font-icon-page"></i>
                 <span class="lbl">Orçamentos</span>
             </a>
         </li>
         <li class="magenta">
-            <a href="/servicos">
+            <a href="/servicos" style="pointer-events: none; cursor: default;">
                 <i class="font-icon font-icon-check-square"></i>
                 <span class="lbl">Serviços</span>
             </a>
         </li>
         <li class="coral">
-            <a href="/clientes">
+            <a href="/clientes" style="pointer-events: none; cursor: default;">
                 <i class="font-icon font-icon-user"></i>
                 <span class="lbl">Clientes</span>
             </a>
         </li>
         <li class="gold">
-            <a href="/comissoes">
+            <a href="/comissoes" style="pointer-events: none; cursor: default;">
                 <i class="font-icon font-icon-star"></i>
                 <span class="lbl">Comissões</span>
             </a>
         </li>
         <li class="blue-dark">
-            <a href="/relatorios">
+            <a href="/relatorios" style="pointer-events: none; cursor: default;">
                 <i class="font-icon font-icon-chart-2"></i>
                 <span class="lbl">Relatórios</span>
             </a>
         </li>
         <li class="blue-sky">
-            <a href="/historico">
+            <a href="/historico" style="pointer-events: none; cursor: default;">
                 <i class="font-icon font-icon-zigzag"></i>
                 <span class="lbl">Histórico</span>
             </a>
