@@ -55,8 +55,6 @@ extension OrcamentoItem: Preparation {
             builder.id()
             builder.int("orcamento_id")
             builder.int("servico_id")
-
-            
         }
     }
     

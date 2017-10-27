@@ -90,5 +90,3 @@ INSERT INTO cidades (regiao_id, nome,created_at,updated_at) VALUES (4,'Guará',n
 INSERT INTO cidades (regiao_id, nome,created_at,updated_at) VALUES (4,'Núcleo Bandeirante',now(),now());
 INSERT INTO cidades (regiao_id, nome,created_at,updated_at) VALUES (4,'Candangolândia',now(),now());
 INSERT INTO cidades (regiao_id, nome,created_at,updated_at) VALUES (4,'SOF SUL',now(),now());
-
-INSERT INTO cidades (regiao_id, nome,created_at,updated_at) VALUES (5,'Nucleo Bandeirante',now(),now());
