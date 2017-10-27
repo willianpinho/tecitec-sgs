@@ -16,7 +16,6 @@ final class Usuario: Model {
     let storage = Storage()
     
     /// The content of the usuarios
-    var codigo: String
     var nome: String
     var documento: String
     var endereco: String
@@ -25,7 +24,6 @@ final class Usuario: Model {
     var cidade: Identifier?
     var celular: String
     var telefone: String
-    var genero: String
     var dataNascimento: String
     var observacoes: String
     var tipo: Identifier?
@@ -34,8 +32,7 @@ final class Usuario: Model {
     var status: Identifier?
     
     /// Creates a new Usuario
-    init(codigo: String, nome: String, documento: String, endereco: String, complemento: String, cidade: Cidade, cep: String, celular: String, telefone: String, genero: String, dataNascimento: String, observacoes: String, tipo: UsuarioTipo, email: String, senha: String, status: Status) {
-        self.codigo = codigo
+    init(nome: String, documento: String, endereco: String, complemento: String, cidade: Cidade, cep: String, celular: String, telefone: String, dataNascimento: String, observacoes: String, tipo: UsuarioTipo, email: String, senha: String, status: Status) {
         self.nome = nome
         self.documento = documento
         self.endereco = endereco
@@ -44,7 +41,6 @@ final class Usuario: Model {
         self.cep = cep
         self.celular = celular
         self.telefone = telefone
-        self.genero = genero
         self.dataNascimento = dataNascimento
         self.observacoes = observacoes
         self.tipo = tipo.id
@@ -58,16 +54,14 @@ final class Usuario: Model {
     /// Initializes the Usuario from the
     /// database row
     init(row: Row) throws {
-        codigo = try row.get("codigo")
         nome = try row.get("nome")
         documento = try row.get("documento")
         endereco = try row.get("endereco")
         complemento = try row.get("complemento")
-        cidade = try row.get("cidade")
+        cidade = try row.get("cidade_id")
         cep = try row.get("cep")
         celular = try row.get("celular")
         telefone = try row.get("telefone")
-        genero = try row.get("genero")
         dataNascimento = try row.get("data_nascimento")
         observacoes = try row.get("observacoes")
         tipo = try row.get("tipo_id")
@@ -79,16 +73,14 @@ final class Usuario: Model {
     // Serializes the Usuario to the database
     func makeRow() throws -> Row {
         var row = Row()
-        try row.set("codigo", codigo)
         try row.set("nome", nome)
         try row.set("documento", documento)
         try row.set("endereco", endereco)
         try row.set("complemento", complemento)
-        try row.set("cidade", cidade)
+        try row.set("cidade_id", cidade)
         try row.set("cep", cep)
         try row.set("celular", celular)
         try row.set("telefone", telefone)
-        try row.set("genero", genero)
         try row.set("data_nascimento", dataNascimento)
         try row.set("observacoes", observacoes)
         try row.set("tipo_id", tipo)
@@ -108,7 +100,6 @@ extension Usuario: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { builder in
             builder.id()
-            builder.string("codigo")
             builder.string("nome")
             builder.string("documento")
             builder.string("endereco")
@@ -117,7 +108,6 @@ extension Usuario: Preparation {
             builder.string("cep")
             builder.string("celular")
             builder.string("telefone")
-            builder.string("genero")
             builder.string("data_nascimento")
             builder.custom("observacoes", type: "TEXT")
             builder.int("tipo_id")
@@ -126,7 +116,7 @@ extension Usuario: Preparation {
             builder.int("status_id")
         }
     }
-    
+
     /// Undoes what was done in `prepare`
     static func revert(_ database: Database) throws {
         try database.delete(self)
@@ -143,7 +133,6 @@ extension Usuario: Preparation {
 extension Usuario: JSONConvertible {
     convenience init(json: JSON) throws {
         try self.init(
-            codigo: json.get("codigo"),
             nome: json.get("nome"),
             documento: json.get("documento"),
             endereco: json.get("endereco"),
@@ -152,7 +141,6 @@ extension Usuario: JSONConvertible {
             cep: json.get("cep"),
             celular: json.get("celular"),
             telefone: json.get("telefone"),
-            genero: json.get("genero"),
             dataNascimento: json.get("data_nascimento"),
             observacoes: json.get("observacoes"),
             tipo: json.get("tipo_id"),
@@ -165,22 +153,23 @@ extension Usuario: JSONConvertible {
     func makeJSON() throws -> JSON {
         var json = JSON()
         try json.set("id", id)
-        try json.set("codigo", codigo)
         try json.set("nome", nome)
         try json.set("documento", documento)
         try json.set("endereco", endereco)
         try json.set("complemento", complemento)
-        try json.set("cidade_id", cidade)
+        let cidadeObject = try Cidade.find(cidade)?.makeJSON()
+        try json.set("cidade", cidadeObject)
         try json.set("cep", cep)
         try json.set("celular", celular)
         try json.set("telefone", telefone)
-        try json.set("genero", genero)
         try json.set("data_nascimento", dataNascimento)
         try json.set("observacoes", observacoes)
-        try json.set("tipo_id", tipo)
+        let tipoObject = try UsuarioTipo.find(tipo)?.makeJSON()
+        try json.set("tipo", tipoObject)
         try json.set("email", email)
         try json.set("senha", senha)
-        try json.set("status_id", status)
+        let statusObject = try Status.find(status)?.makeJSON()
+        try json.set("status", statusObject)
 
         return json
     }
