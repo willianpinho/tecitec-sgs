@@ -97,6 +97,14 @@ final class ConfiguracoesController: ResourceRepresentable {
         drop.get("configuracoes/tipos-cliente/:tipoClienteId/editar", handler: editarTiposClienteId)
         drop.post("configuracoes/tipos-cliente/:tipoClienteId/editar", handler: editTiposClienteId)
         drop.post("configuracoes/tipos-cliente/:tipoClienteId/deletar", handler: deleteTiposClienteId)
+        
+        drop.get("configuracoes/colaboradores", handler: showColaboradores)
+        drop.get("configuracoes/colaboradores/adicionar", handler: adicionarColaboradores)
+        drop.post("configuracoes/colaboradores/adicionar", handler: addColaboradores)
+        drop.get("configuracoes/colaboradores/:colaboradorId", handler: showColaboradoresId)
+        drop.get("configuracoes/colaboradores/:colaboradorId/editar", handler: editarColaboradoresId)
+        drop.post("configuracoes/colaboradores/:colaboradorId/editar", handler: editColaboradoresId)
+        drop.post("configuracoes/colaboradores/:colaboradorId/deletar", handler: deleteColaboradoresId)
 
         
     }
@@ -939,6 +947,212 @@ final class ConfiguracoesController: ResourceRepresentable {
         
         return Response(redirect: "/configuracoes/tipos-usuario")
     }
+    
+    // MARK: Rotas de Colaboradores
+    func showColaboradores(request: Request) throws -> ResponseRepresentable {
+        let colaboradores = try Usuario.makeQuery().or({ (group) in
+            try group.filter("tipo_id", 1)
+            try group.filter("tipo_id", 2)
+            try group.filter("tipo_id", 3)
+
+        }).all().makeJSON()
+        
+        let parameters = try Node(node: [
+            "colaboradores": colaboradores
+            ])
+        
+        return try view.make("configuracoes/colaboradores/colaboradores", parameters)
+    }
+    
+    func adicionarColaboradores(request: Request) throws -> ResponseRepresentable {
+        let tipos = try UsuarioTipo.makeQuery().or({ (group) in
+            try group.filter("id", 1)
+            try group.filter("id", 2)
+            try group.filter("id", 3)
+        }).all().makeJSON()
+        
+        let cidades = try Cidade.makeQuery().all().makeJSON()
+        
+        let parameters = try Node(node: [
+            "tipos": tipos,
+            "cidades": cidades
+            ])
+        return try view.make("configuracoes/colaboradores/colaboradores_adicionar", parameters)
+    }
+    
+    func addColaboradores(request: Request) throws -> ResponseRepresentable {
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        guard let documento = request.data["documento"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo documento")
+        }
+        
+        guard let endereco = request.data["endereco"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo endereco")
+            
+        }
+        
+        guard let complemento = request.data["complemento"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo complemento")
+        }
+        
+        guard let cep = request.data["cep"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo cep")
+        }
+        
+        guard let celular = request.data["celular"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo celular")
+        }
+        
+        guard let telefone = request.data["telefone"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo telefone")
+        }
+        
+        guard let dataNascimento = request.data["data_nascimento"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo data nascimneto")
+        }
+        
+        guard let observacoes = request.data["observacoes"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo observacoes")
+        }
+        
+        guard let email = request.data["email"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo email")
+        }
+        
+        guard let cidadeId = request.data["cidade_id"]?.int else {
+            throw Abort(.badRequest, reason: "Sem campo cidade")
+        }
+        
+        guard let usuarioTipoId = request.data["tipo_id"]?.int else {
+            throw Abort(.badRequest, reason: "Sem campo tipo")
+        }
+        
+        let cidade = try Cidade.find(cidadeId)
+        let usuarioTipo = try UsuarioTipo.find(usuarioTipoId)
+        let status = try Status.makeQuery().filter("nome", "Ativo").first()
+        
+        let colaborador = Usuario(nome: nome, documento: documento, endereco: endereco, complemento: complemento, cidade: cidade!, cep: cep, celular: celular, telefone: telefone, dataNascimento: dataNascimento, observacoes: observacoes, tipo: usuarioTipo!, email: email, senha: "tecitec", status: status!)
+        
+        try colaborador.save()
+        
+        return Response(redirect: "/configuracoes/colaboradores")
+    }
+    
+    func showColaboradoresId(request: Request) throws -> ResponseRepresentable {
+        let colaboradorId = request.parameters["colaboradorId"]?.int
+        let colaborador = try Usuario.find(colaboradorId)?.makeJSON()
+        let parameters = try Node(node: [
+            "colaborador": colaborador
+            ])
+        return try view.make("configuracoes/colaboradores/colaboradores_id", parameters)
+    }
+    
+    func editarColaboradoresId(request: Request) throws -> ResponseRepresentable {
+        let colaboradorId = request.parameters["colaboradorId"]?.int
+        let colaborador = try Usuario.find(colaboradorId)?.makeJSON()
+        
+        let tipos = try UsuarioTipo.makeQuery().or({ (group) in
+            try group.filter("id", 1)
+            try group.filter("id", 2)
+            try group.filter("id", 3)
+        }).all().makeJSON()
+        
+        let cidades = try Cidade.makeQuery().all().makeJSON()
+        
+        let parameters = try Node(node: [
+            "tipos": tipos,
+            "cidades": cidades,
+            "colaborador": colaborador
+            ])
+        
+        return try view.make("configuracoes/colaboradores/colaboradores_id_editar", parameters)
+    }
+    
+    func editColaboradoresId(request: Request) throws -> ResponseRepresentable {
+        let colaboradorId = request.parameters["colaboradorId"]?.int
+        let colaborador = try Usuario.find(colaboradorId)
+        guard let nome = request.data["nome"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo nome")
+        }
+        
+        guard let documento = request.data["documento"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo documento")
+        }
+        
+        guard let endereco = request.data["endereco"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo endereco")
+            
+        }
+        
+        guard let complemento = request.data["complemento"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo complemento")
+        }
+        
+        guard let cep = request.data["cep"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo cep")
+        }
+        
+        guard let celular = request.data["celular"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo celular")
+        }
+        
+        guard let telefone = request.data["telefone"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo telefone")
+        }
+        
+        guard let dataNascimento = request.data["data_nascimento"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo data nascimneto")
+        }
+        
+        guard let observacoes = request.data["observacoes"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo observacoes")
+        }
+        
+        guard let email = request.data["email"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo email")
+        }
+        
+        guard let cidadeId = request.data["cidade_id"]?.int else {
+            throw Abort(.badRequest, reason: "Sem campo cidade")
+        }
+        
+        guard let usuarioTipoId = request.data["tipo_id"]?.int else {
+            throw Abort(.badRequest, reason: "Sem campo tipo")
+        }
+        
+        let cidade = try Cidade.find(cidadeId)
+        let usuarioTipo = try UsuarioTipo.find(usuarioTipoId)
+        
+        colaborador?.nome = nome
+        colaborador?.documento = documento
+        colaborador?.endereco = endereco
+        colaborador?.complemento = complemento
+        colaborador?.cidade = cidade?.id
+        colaborador?.cep = cep
+        colaborador?.celular = celular
+        colaborador?.telefone = telefone
+        colaborador?.dataNascimento = dataNascimento
+        colaborador?.observacoes = observacoes
+        colaborador?.tipo = usuarioTipo?.id
+        colaborador?.email = email
+        
+        try colaborador?.save()
+        
+        return Response(redirect: "/configuracoes/colaboradores/\(colaboradorId!)")
+    }
+    
+    func deleteColaboradoresId(request: Request) throws -> ResponseRepresentable {
+        let colaboradorId = request.parameters["colaboradorId"]?.int
+        
+        let colaborador = try Usuario.find(colaboradorId)
+        try colaborador?.delete()
+        
+        return Response(redirect: "/configuracoes/colaboradores")
+    }
+    
     
     /// When making a controller, it is pretty flexible in that it
     /// only expects closures, this is useful for advanced scenarios, but
