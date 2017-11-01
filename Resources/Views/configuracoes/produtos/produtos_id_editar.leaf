@@ -1,0 +1,89 @@
+#extend("embeds/base")
+
+#export("title") { Tecitec - Editar Materiais }
+
+#export("content") {
+<div class="page-content">
+    <div class="container-fluid">
+        <header class="section-header">
+            <div class="tbl">
+                <div class="tbl-row">
+                    <div class="tbl-cell">
+                        <h3>Produtos</h3>
+                        <ol class="breadcrumb breadcrumb-simple">
+                            <li><a href="/">Tecitec</a></li>
+                            <li><a href="/configuracoes">Configurações</a></li>
+                            <li><a href="/configuracoes/produtos">Produtos</a></li>
+                            <li class="active">Editar Produto</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="box-typical box-typical-padding">
+            <ul class=" ">
+                <form id="form-group" role="form" autocomplete="on" action="/configuracoes/produtos/#(produto.id)/deletar" method="post">
+                    <li><button type="submit" class="btn btn-inline pull-right btn-danger-outline">Deletar Produto</button></li>
+                </form>
+                
+            </ul>
+            <h5 class="m-t-lg with-border">Editar Produto</h5>
+            <form id="form-group" role="form" autocomplete="on" action="/configuracoes/produtos/#(produto.id)/editar" method="post">
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Tipo Serviço</label>
+                    <div class="col-sm-4">
+                        <select id="tipo" class="form-control select" name="tipo_servico_id">
+                            #loop(tipos, "tipo") {
+                            #equal(tipo.id, produto.tipo_servico.id) {
+                            <option value="#(tipo.id)" selected>#(tipo.nome)</option>
+                            } ##else() {
+                            <option value="#(tipo.id)" selected>#(tipo.nome)</option>
+                            }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Item</label>
+                    <div class="col-sm-4">
+                        <select id="tipo" class="form-control select" name="item_id">
+                            #loop(itens, "item") {
+                            #equal(item.id, produto.item.id) {
+                            <option value="#(item.id)" selected>#(item.nome)</option>
+                            } ##else() {
+                            <option value="#(item.id)" selected>#(item.nome)</option>
+                            }
+                            }
+                        </select>
+                        
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Custo</label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static"><input type="text" class="form-control" id="price" placeholder="R$" name="custo" value="#(produto.custo)"/></p>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Preço</label>
+                    <div class="col-sm-4">
+                        <p class="form-control-static"><input type="text" class="form-control" id="price" placeholder="R$" name="preco" value="#(produto.preco)"/></p>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn pull-right">Editar Produto</button>
+                    </div>
+                </div>
+                
+                
+            </form>
+            
+        </div><!--.box-typical-->
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+}
+

@@ -9,6 +9,5 @@ $(document).ready(function() {
                   $('#us-phone-mask-input').mask('(000) 000-0000', {placeholder: "(___) ___-____"});
                   $('#br-celphone-mask-input').mask('(00) 00000-0000', {placeholder: "(__) _____-____"});
                   $('#ip-address-mask-input').mask('099.099.099.099');
-                  
                   $('#mixed-mask-input').mask('AAA 000-S0S');
                   });

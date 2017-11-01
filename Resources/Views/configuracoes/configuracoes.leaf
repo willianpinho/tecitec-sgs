@@ -26,10 +26,32 @@
                 <div class="col-xs-3">
                     <section class="widget widget-simple-sm">
                         <div class="widget-simple-sm-icon">
+                            <i class="fa fa-tasks color-blue"></i>
+                        </div>
+                        <div class="widget-simple-sm-bottom">
+                            <a href="/configuracoes/produtos">Catalogo de Serviços</a>
+                        </div>
+                    </section><!--.widget-simple-sm-->
+                </div>
+                
+                <div class="col-xs-3">
+                    <section class="widget widget-simple-sm">
+                        <div class="widget-simple-sm-icon">
                             <i class="fa fa-bars color-blue"></i>
                         </div>
                         <div class="widget-simple-sm-bottom">
                             <a href="/configuracoes/tipos-servico">Tipos de Serviços</a></div>
+                    </section><!--.widget-simple-sm-->
+                </div>
+                
+                <div class="col-xs-3">
+                    <section class="widget widget-simple-sm">
+                        <div class="widget-simple-sm-icon">
+                            <i class="fa fa-inbox color-blue"></i>
+                        </div>
+                        <div class="widget-simple-sm-bottom">
+                            <a href="/configuracoes/itens">Itens</a>
+                        </div>
                     </section><!--.widget-simple-sm-->
                 </div>
                 <div class="col-xs-3">
@@ -79,16 +101,7 @@
                     </section><!--.widget-simple-sm-->
                 </div>
                 
-                <div class="col-xs-3">
-                    <section class="widget widget-simple-sm">
-                        <div class="widget-simple-sm-icon">
-                            <i class="fa fa-inbox color-blue"></i>
-                        </div>
-                        <div class="widget-simple-sm-bottom">
-                            <a href="/configuracoes/itens">Itens</a>
-                        </div>
-                    </section><!--.widget-simple-sm-->
-                </div>
+                
                 
                 <div class="col-xs-3">
                     <section class="widget widget-simple-sm">

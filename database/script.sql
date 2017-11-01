@@ -17,8 +17,6 @@ INSERT INTO status (nome,created_at,updated_at) VALUES ('Serviço - Cancelado',n
 INSERT INTO status (nome,created_at,updated_at) VALUES ('Ativo',now(),now());
 INSERT INTO status (nome,created_at,updated_at) VALUES ('Inativo',now(),now());
 
-
-
 INSERT INTO servico_tipos (nome,descricao,created_at,updated_at) VALUES ('Impermeabilização de Estofados','É um tratamento que quando se aplica no tecido dos estofados, envolve cada uma das suas fibras, sem tirar a ventilação do tecido e assim impede a penetração de manchas por líquidos derramados.', now(),now());
 INSERT INTO servico_tipos (nome,descricao,created_at,updated_at) VALUES ('Lavagem de Estofados','Trabalhamos com a lavagem a seco, que é feita na casa do cliente, deixando o estofado limpo e ajuda a matar ácaros e agentes alérgicos.',now(),now());
 INSERT INTO servico_tipos (nome,descricao,created_at,updated_at) VALUES (' Hidratação de Estofados','Hidrata o couro do estofado evitando rachaduras e dando mais durabilidade para o mesmo.',now(),now());
@@ -26,12 +24,69 @@ INSERT INTO servico_tipos (nome,descricao,created_at,updated_at) VALUES (' Hidra
 INSERT INTO materiais (nome,created_at,updated_at) VALUES ('Couro',now(),now());
 INSERT INTO materiais (nome,created_at,updated_at) VALUES ('Tecido',now(),now());
 
-INSERT INTO item_tipos (nome,created_at,updated_at) VALUES ('Sofá',now(),now());
-INSERT INTO item_tipos (nome,created_at,updated_at) VALUES ('Banco',now(),now());
-INSERT INTO item_tipos (nome,created_at,updated_at) VALUES ('Colchão',now(),now());
-INSERT INTO item_tipos (nome,created_at,updated_at) VALUES ('Poltrona',now(),now());
-INSERT INTO item_tipos (nome,created_at,updated_at) VALUES ('Tapete',now(),now());
-
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('3/2 ASS/ENC SOLTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('BANCO DE CARRO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CABECEIRA CAMA SOLTEIRO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CABECEIRA DE CAMA CASAL',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CADEIRA ASS/ENCOSTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CADEIRA ASSENTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CADEIRA DE JANTAR ASS/ENCOSTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CADEIRA DE JANTAR ASSENTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CAMA BOX CASAL 1,38',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CAMA BOX CASAL 1,58',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CAMA BOX CASAL 1,93',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CAMA BOX SOLTEIRO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CAMA BOX SOLTEIRO C/AUXILIAR',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CAMA BOX 1,93',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CAMA BOX CASAL',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CAMA BOX SOLTEIRO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CARRO ELITE',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CARRO POPULAR',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CHAESE DUPLA ENC SOLTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CHAESE ENCOSTO SOLTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('CHAESE FIXA',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('POLTRONA PAPAI',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('POLTRONA 2 LUG BRAÇO MADEIRA',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('POLTRONA 2 LUG ESTOFADA',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('POLTRONA ASS/ENCOSTO SOLTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('POLTRONA ASSENTO SOLTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('POLTRONA BRAÇO MADEIRA',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('POLTRONA PRINCEZINHA',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('POLTRONA',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('PUFF GRANDE',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('PUFF PEQUENO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA 2 LUG RETRATIL ATE 2,00',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA 2 LUG RETRATIL DE 201 ATE 2,50',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA 3 LUGARES C/CHAESE ASS SOLTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA 3 LUGARES C/CHAESE FIXO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA 3/2 COURO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA 3/2 LUG',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA 3/2 LUGARES ASS SOLTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA 3/2 LUGARES ASS/ENCOSTO SOLTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA 3/2 LUGARES FIXO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA 3/2 LUGARES RETRATIL',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA 3/2 LUGARES RETRATIL C/ENC SOLTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA 4 LUG',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA 5 LUG RETRATIL 3,60 MTS',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CAMA',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CAMA 1 LUGAR',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CAMA 2 LUGARES',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CAMA 3 LUGARES',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CANTO C/CHAESE',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CANTO COURO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CANTO 5 LUGARES ASS /ENC SOLTO C/CHAESE',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CANTO 5 LUGARES ASS SOLTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CANTO 5 LUGARES ASS SOLTO C/CHAESE',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CANTO 5 LUGARES ASS/ENCOSTO SOLTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CANTO 5 LUGARES FIXO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CANTO 5 LUGARES FIXO C/CHAESE',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CANTO 6 LUGARES ASS SOLTO C/CHAESE',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA CANTO 6 LUGARES ASSENTO SOLTO',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA DE 2 LUGARES',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA DE 3 LUGARES',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA DE CANTO 6 LUG RETRATIL',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA RETRATIL ACIMA DE 3,1 MTS',now(),now());
+INSERT INTO itens (nome,created_at,updated_at) VALUES ('SOFA RETRATIL DE 251 ATE 300 MTS',now(),now());
 
 INSERT INTO carros (nome,created_at,updated_at) VALUES ('Luxo',now(),now());
 INSERT INTO carros (nome,created_at,updated_at) VALUES ('Popular',now(),now());
@@ -90,3 +145,6 @@ INSERT INTO cidades (regiao_id, nome,created_at,updated_at) VALUES (4,'Guará',n
 INSERT INTO cidades (regiao_id, nome,created_at,updated_at) VALUES (4,'Núcleo Bandeirante',now(),now());
 INSERT INTO cidades (regiao_id, nome,created_at,updated_at) VALUES (4,'Candangolândia',now(),now());
 INSERT INTO cidades (regiao_id, nome,created_at,updated_at) VALUES (4,'SOF SUL',now(),now());
+
+INSERT INTO produtos (tipo_servico_id, item_id, custo, preco,created_at,updated_at) VALUES (1,3,90,90,now(),now());
+INSERT INTO produtos (tipo_servico_id, item_id, custo, preco,created_at,updated_at) VALUES (2,3,125,90,now(),now());

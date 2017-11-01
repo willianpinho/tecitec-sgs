@@ -20,21 +20,17 @@ extension Config {
     /// schemas prepared before the app boots
     private func setupPreparations() throws {
         preparations.append(Carro.self)
-        preparations.append(CarroBanco.self)
         preparations.append(Cidade.self)
-        preparations.append(Colchao.self)
         preparations.append(Empresa.self)
-        preparations.append(ItemTipo.self)
+        preparations.append(Item.self)
         preparations.append(Material.self)
         preparations.append(Orcamento.self)
         preparations.append(OrcamentoItem.self)
-        preparations.append(Poltrona.self)
+        preparations.append(Produto.self)
         preparations.append(Regiao.self)
         preparations.append(Servico.self)
         preparations.append(ServicoTipo.self)
-        preparations.append(Sofa.self)
         preparations.append(Status.self)
-        preparations.append(Tapete.self)
         preparations.append(Usuario.self)
         preparations.append(UsuarioTipo.self)
 

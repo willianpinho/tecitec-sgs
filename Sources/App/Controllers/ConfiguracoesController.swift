@@ -58,6 +58,15 @@ final class ConfiguracoesController: ResourceRepresentable {
         drop.post("configuracoes/materiais/:materialId/editar", handler: editMateriaisId)
         drop.post("configuracoes/materiais/:materialId/deletar", handler: deleteMateriaisId)
         
+        drop.get("configuracoes/produtos", handler: showProdutos)
+        drop.get("configuracoes/produtos/adicionar", handler: adicionarProdutos)
+        drop.post("configuracoes/produtos/adicionar", handler: addProdutos)
+        drop.get("configuracoes/produtos/:produtoId", handler: showProdutosId)
+        drop.get("configuracoes/produtos/:produtoId/editar", handler: editarProdutosId)
+        drop.post("configuracoes/produtos/:produtoId/editar", handler: editProdutosId)
+        drop.post("configuracoes/produtos/:produtoId/deletar", handler: deleteProdutosId)
+        
+        
         drop.get("configuracoes/regioes", handler: showRegioes)
         drop.get("configuracoes/regioes/adicionar", handler: adicionarRegioes)
         drop.post("configuracoes/regioes/adicionar", handler: addRegioes)
@@ -387,7 +396,7 @@ final class ConfiguracoesController: ResourceRepresentable {
     
     //MARK: Rotas de Itens
     func showItens(request: Request) throws -> ResponseRepresentable {
-        let itensObject = try ItemTipo.all()
+        let itensObject = try Item.all()
         var empty = true
         if itensObject.count > 0 {
             empty = false
@@ -414,7 +423,7 @@ final class ConfiguracoesController: ResourceRepresentable {
             throw Abort(.badRequest, reason: "Sem campo nome")
         }
         
-        let item = ItemTipo(nome: nome)
+        let item = Item(nome: nome)
         try item.save()
         
         return Response(redirect: "/configuracoes/itens")
@@ -423,7 +432,7 @@ final class ConfiguracoesController: ResourceRepresentable {
     func showItensId(request: Request) throws -> ResponseRepresentable {
         let itemId = request.parameters["itemId"]?.int
         
-        let item = try ItemTipo.makeQuery().filter("id", itemId).first()?.makeJSON()
+        let item = try Item.makeQuery().filter("id", itemId).first()?.makeJSON()
         let parameters = try Node(node: [
             "item": item,
             ])
@@ -434,7 +443,7 @@ final class ConfiguracoesController: ResourceRepresentable {
     func editarItensId(request: Request) throws -> ResponseRepresentable {
         let itemId = request.parameters["itemId"]?.int
         
-        let item = try ItemTipo.makeQuery().filter("id", itemId).first()?.makeJSON()
+        let item = try Item.makeQuery().filter("id", itemId).first()?.makeJSON()
         let parameters = try Node(node: [
             "item": item,
             ])
@@ -448,7 +457,7 @@ final class ConfiguracoesController: ResourceRepresentable {
             throw Abort(.badRequest, reason: "Sem campo nome")
         }
         
-        let item = try ItemTipo.find(itemId)
+        let item = try Item.find(itemId)
         item?.nome = nome
         
         try item?.save()
@@ -459,7 +468,7 @@ final class ConfiguracoesController: ResourceRepresentable {
     
     func deleteItensId(request: Request) throws -> ResponseRepresentable {
         let itemId = request.parameters["itemId"]?.int
-        let item = try ItemTipo.find(itemId)
+        let item = try Item.find(itemId)
         try item?.delete()
         
         return Response(redirect: "/configuracoes/itens")
@@ -541,6 +550,133 @@ final class ConfiguracoesController: ResourceRepresentable {
         try material?.delete()
         
         return Response(redirect: "/configuracoes/materiais")
+    }
+    
+    //MARK: Rotas de Produtos
+    func showProdutos(request: Request) throws -> ResponseRepresentable {
+        let produtosObject = try Produto.all()
+        var empty = true
+        if produtosObject.count > 0 {
+            empty = false
+        }
+        
+        let produtos = try produtosObject.makeJSON()
+        
+        let parameters = try Node(node: [
+            "produtos": produtos,
+            "empty": empty
+            ])
+        return try view.make("configuracoes/produtos/produtos", parameters)
+    }
+    
+    func adicionarProdutos(request: Request) throws -> ResponseRepresentable {
+        let tipoServicos = try ServicoTipo.all().makeJSON()
+        let itens = try Item.all().makeJSON()
+        
+        let parameters = try Node(node: [
+            "tipos": tipoServicos,
+            "itens": itens
+            ])
+        return try view.make("configuracoes/produtos/produtos_adicionar", parameters)
+    }
+    
+    func addProdutos(request: Request) throws -> ResponseRepresentable {
+        guard let tipoServicoId = request.data["tipo_servico_id"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo Tipo de Serviço")
+        }
+        
+        guard let itemId = request.data["item_id"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo item")
+        }
+        
+        guard let custo = request.data["custo"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo custo")
+        }
+        
+        guard let preco = request.data["preco"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo preco")
+        }
+        
+        let custoDouble = Util.formatStringCurrency(currency: custo)
+        let precoDouble = Util.formatStringCurrency(currency: preco)
+
+        
+        let tipoServico = try ServicoTipo.find(tipoServicoId.int)
+        let item = try Item.find(itemId.int)
+        
+        let produto = Produto(tipoServico: tipoServico!, item: item!, custo: custoDouble, preco: precoDouble)
+        try produto.save()
+        
+        return Response(redirect: "/configuracoes/produtos")
+    }
+    
+    func showProdutosId(request: Request) throws -> ResponseRepresentable {
+        let produtoId = request.parameters["produtoId"]?.int
+        
+        let produto = try Produto.makeQuery().filter("id", produtoId).first()?.makeJSON()
+        let parameters = try Node(node: [
+            "produto": produto,
+            ])
+        
+        return try view.make("configuracoes/produtos/produtos_id", parameters)
+    }
+    
+    func editarProdutosId(request: Request) throws -> ResponseRepresentable {
+        let produtoId = request.parameters["produtoId"]?.int
+        
+        let tipoServicos = try ServicoTipo.all().makeJSON()
+        let itens = try Item.all().makeJSON()
+        let produto = try Produto.makeQuery().filter("id", produtoId).first()?.makeJSON()
+
+        let parameters = try Node(node: [
+            "tipos": tipoServicos,
+            "itens": itens,
+            "produto": produto,
+
+            ])
+        return try view.make("configuracoes/produtos/produtos_id_editar", parameters)
+    }
+    
+    func editProdutosId(request: Request) throws -> ResponseRepresentable {
+        let produtoId = request.parameters["produtoId"]?.int
+        
+        guard let tipoServicoId = request.data["tipo_servico_id"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo Tipo de Serviço")
+        }
+        
+        guard let itemId = request.data["item_id"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo item")
+        }
+        
+        guard let custo = request.data["custo"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo custo")
+        }
+        
+        guard let preco = request.data["preco"]?.string else {
+            throw Abort(.badRequest, reason: "Sem campo preco")
+        }
+        
+        let tipoServico = try ServicoTipo.find(tipoServicoId.int)
+        let item = try Item.find(itemId.int)
+        
+        let produto = try Produto.find(produtoId)
+        produto?.tipoServico = tipoServico?.id
+        produto?.item = item?.id
+        produto?.custo = Double(custo)!
+        produto?.preco = Double(preco)!
+        
+        try produto?.save()
+        
+        
+        return Response(redirect: "/configuracoes/produtos/\(produtoId!)")
+    }
+    
+    func deleteProdutosId(request: Request) throws -> ResponseRepresentable {
+        let produtoId = request.parameters["produtoId"]?.int
+        let produto = try Produto.find(produtoId)
+        try produto?.delete()
+        
+        return Response(redirect: "/configuracoes/produtos")
     }
     
     //MARK: Rotas de Regioes

@@ -1,17 +1,16 @@
 //
-//  Servico.swift
-//  Tecitec
+//  Produto.swift
+//  TecitecPackageDescription
 //
-//  Created by Willian Pinho on 5/30/17.
-//
+//  Created by Willian Pinho on 10/31/17.
 //
 
 import Vapor
 import FluentProvider
 import HTTP
 
-final class Servico: Model {
-    static let entity = "servicos"
+final class Produto: Model {
+    static let entity = "produtos"
     
     let storage = Storage()
     
@@ -21,7 +20,7 @@ final class Servico: Model {
     var custo: Double
     var preco: Double
     
-    /// Creates a new Servico
+    /// Creates a new Produto
     init(tipoServico: ServicoTipo, item: Item, custo: Double, preco: Double) {
         self.tipoServico = tipoServico.id
         self.item = item.id
@@ -31,33 +30,33 @@ final class Servico: Model {
     
     // MARK: Fluent Serialization
     
-    /// Initializes the Servico from the
+    /// Initializes the Produto from the
     /// database row
     init(row: Row) throws {
         tipoServico = try row.get("tipo_servico_id")
         item = try row.get("item_id")
         custo = try row.get("custo")
         preco = try row.get("preco")
-
+        
     }
     
-    // Serializes the Servico to the database
+    // Serializes the Produto to the database
     func makeRow() throws -> Row {
         var row = Row()
         try row.set("tipo_servico_id", tipoServico)
         try row.set("item_id", item)
         try row.set("custo", custo)
         try row.set("preco", preco)
-
+        
         return row
     }
 }
 
 // MARK: Fluent Preparation
 
-extension Servico: Preparation {
+extension Produto: Preparation {
     /// Prepares a table/collection in the database
-    /// for storing Servicos
+    /// for storing Produtos
     static func prepare(_ database: Database) throws {
         try database.create(self) { builder in
             builder.id()
@@ -65,7 +64,7 @@ extension Servico: Preparation {
             builder.int("item_id")
             builder.double("custo")
             builder.double("preco")
-
+            
             
         }
     }
@@ -80,10 +79,10 @@ extension Servico: Preparation {
 
 // How the model converts from / to JSON.
 // For example when:
-//     - Creating a new Servico (POST /servicoss)
+//     - Creating a new Produto (POST /servicoss)
 //     - Fetching a servicos (GET /servicoss, GET /servicoss/:id)
 //
-extension Servico: JSONConvertible {
+extension Produto: JSONConvertible {
     convenience init(json: JSON) throws {
         try self.init(
             tipoServico: json.get("tipo_servico_id"),
@@ -103,17 +102,17 @@ extension Servico: JSONConvertible {
         try json.set("item", currentItem)
         let currentServico = try ServicoTipo.makeQuery().filter("id", tipoServico?.int).first()?.makeJSON()
         try json.set("tipo_servico", currentServico)
-
+        
         return json
     }
 }
 
 // MARK: HTTP
 
-// This allows Servico models totime
-extension Servico: ResponseRepresentable { }
+// This allows Produto models totime
+extension Produto: ResponseRepresentable { }
 
-extension Servico: Timestampable {
+extension Produto: Timestampable {
     static var updatedAtKey: String { return "updated_at" }
     static var createdAtKey: String { return "created_at" }
 }
