@@ -1,0 +1,50 @@
+#extend("embeds/base")
+
+#export("title") { Tecitec - Empresa #(empresa.nome)}
+
+#export("content") {
+<div class="page-content">
+    <div class="container-fluid">
+        <header class="section-header">
+            <div class="tbl">
+                <div class="tbl-row">
+                    <div class="tbl-cell">
+                        <h3>Empresas</h3>
+                        <ol class="breadcrumb breadcrumb-simple">
+                            <li><a href="/">Tecitec</a></li>
+                            <li><a href="/configuracoes">Configurações</a></li>
+                            <li><a href="/configuracoes/empresas">Empresas</a></li>
+                            <li class="active">#(empresa.nome)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="box-typical box-typical-padding">
+            <ul class=" ">
+                <form id="form-group" role="form" autocomplete="on" action="/configuracoes/empresas/#(empresa.id)/editar" method="get">
+                    <li><button type="submit" class="btn btn-inline pull-right btn-warning-outline">Editar Empresa</button></li>
+                </form>
+            
+            </ul>
+            <h5 class="m-t-lg with-border">Dados da Empresa</h5>
+            
+            <div class="form-group row">
+                <b><label class="col-sm-2 form-control-label">Nome:</label></b>
+                <div class="col-sm-10">
+                    <p class="form-control-static">#(empresa.nome)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <b><label class="col-sm-2 form-control-label">CNPJ:</label></b>
+                <div class="col-sm-10">
+                    <p class="form-control-static">#(empresa.cnpj)</p>
+                </div>
+            </div>
+            
+            
+        </div><!--.box-typical-->
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+}
+

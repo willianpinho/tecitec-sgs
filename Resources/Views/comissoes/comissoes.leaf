@@ -1,0 +1,24 @@
+#extend("embeds/base")
+
+#export("title") { Tecitec - Comissões }
+
+#export("content") {
+<div class="page-content">
+    <div class="container-fluid">
+        <header class="section-header">
+            <div class="tbl">
+                <div class="tbl-row">
+                    <div class="tbl-cell">
+                        <h3>Comissões</h3>
+                        <ol class="breadcrumb breadcrumb-simple">
+                            <li><a href="">Início</a></li>
+                            <li class="active">Comissões</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+}
+

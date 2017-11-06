@@ -1,0 +1,241 @@
+#extend("embeds/base")
+
+#export("title") { Tecitec - Orçamentos }
+
+#export("content") {
+<div class="page-content">
+    <div class="container-fluid">
+        
+        
+        <header class="section-header">
+            <div class="tbl">
+                <div class="tbl-row">
+                    <div class="tbl-cell">
+                        <h3>Orçamentos</h3>
+                        <ol class="breadcrumb breadcrumb-simple">
+                            <li><a href="">Início</a></li>
+                            <li class="active">Orçamentos</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <ul class=" ">
+            <form id="form-group" role="form" autocomplete="on" action="/orcamentos/adicionar" method="get">
+                <li><button type="submit" class="btn btn-inline pull-right btn-success">Adicionar Novo Orçamento</button></li>
+            </form>
+        </ul>
+        <section class="tabs-section">
+            <div class="tabs-section-nav tabs-section-nav-icons">
+                <div class="tbl">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#()tabs-1-tab-1" role="tab" data-toggle="tab">
+                                <span class="nav-link-in">
+                                    <i class="fa fa-play"></i>
+                                    Iniciados
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#()tabs-1-tab-2" role="tab" data-toggle="tab">
+                                <span class="nav-link-in">
+                                    <span class="glyphicon glyphicon-earphone"></span>
+                                    A contactar
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#()tabs-1-tab-3" role="tab" data-toggle="tab">
+                                <span class="nav-link-in">
+                                    <i class="fa fa-close"></i>
+                                    Finalizados
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#()tabs-1-tab-3" role="tab" data-toggle="tab">
+                                <span class="nav-link-in">
+                                    <i class="fa fa-trash"></i>
+                                    Cancelados
+                                </span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div><!--.tabs-section-nav-->
+            
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active show" id="tabs-1-tab-1">
+                    <section class="box-typical scrollable">
+                        <header class="box-typical-header">
+                            <div class="tbl-row">
+                                <div class="tbl-cell tbl-cell-title">
+                                    <h3>Orçamentos Iniciados</h3>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="box-typical-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Cliente</th>
+                                            <th>Atendente</th>
+                                            <th>Status</th>
+                                            <th>Valor</th>
+                                            <th><i class="font-icon font-icon-re"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        #loop(o_negociacao, "orcamento") {
+                                        <tr>
+                                            <td>#(orcamento.id)</td>
+                                            <td>#(orcamento.cliente.nome)</a></td>
+                                            <td>#(orcamento.atendente.nome)</td>
+                                            <td>#(orcamento.status.nome)</td>
+                                            <td>#(orcamento.valor)</td>
+                                            <td><a href="/orcamentos/#(orcamento.id)">Ver Detalhes</a></td>
+                                        </tr>
+                                        }
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><!--.box-typical-body-->
+                    </section><!--.box-typical-->
+
+                </div><!--.tab-pane-->
+                <div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-2">
+                    
+                    <section class="box-typical scrollable">
+                        <header class="box-typical-header">
+                            <div class="tbl-row">
+                                <div class="tbl-cell tbl-cell-title">
+                                    <h3>Orçamentos a Contactar</h3>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="box-typical-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Cliente</th>
+                                            <th>Atendente</th>
+                                            <th>Status</th>
+                                            <th>Valor</th>
+                                            <th><i class="font-icon font-icon-re"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        #loop(o_contactar, "orcamento") {
+                                        <tr>
+                                            <td>#(orcamento.id)</td>
+                                            <td>#(orcamento.cliente.nome)</a></td>
+                                            <td>#(orcamento.atendente.nome)</td>
+                                            <td>#(orcamento.status.nome)</td>
+                                            <td>#(orcamento.valor)</td>
+                                            <td><a href="/orcamentos/#(orcamento.id)">Ver Detalhes</a></td>
+                                        </tr>
+                                        }
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><!--.box-typical-body-->
+                    </section><!--.box-typical-->
+                
+                
+                </div><!--.tab-pane-->
+                <div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-3">
+                    <section class="box-typical scrollable">
+                        <header class="box-typical-header">
+                            <div class="tbl-row">
+                                <div class="tbl-cell tbl-cell-title">
+                                    <h3>Orçamentos Finalizados</h3>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="box-typical-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Cliente</th>
+                                            <th>Atendente</th>
+                                            <th>Status</th>
+                                            <th>Valor</th>
+                                            <th><i class="font-icon font-icon-re"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        #loop(o_fechado, "orcamento") {
+                                        <tr>
+                                            <td>#(orcamento.id)</td>
+                                            <td>#(orcamento.cliente.nome)</a></td>
+                                            <td>#(orcamento.atendente.nome)</td>
+                                            <td>#(orcamento.status.nome)</td>
+                                            <td>#(orcamento.valor)</td>
+                                            <td><a href="/orcamentos/#(orcamento.id)">Ver Detalhes</a></td>
+                                        </tr>
+                                        }
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><!--.box-typical-body-->
+                    </section><!--.box-typical-->
+                </div><!--.tab-pane-->
+                <div role="tabpanel" class="tab-pane fade" id="tabs-1-tab-4">
+                    <section class="box-typical scrollable">
+                        <header class="box-typical-header">
+                            <div class="tbl-row">
+                                <div class="tbl-cell tbl-cell-title">
+                                    <h3>Orçamentos Cancelados</h3>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="box-typical-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Cliente</th>
+                                            <th>Atendente</th>
+                                            <th>Status</th>
+                                            <th>Valor</th>
+                                            <th><i class="font-icon font-icon-re"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        #loop(o_cancelado, "orcamento") {
+                                        <tr>
+                                            <td>#(orcamento.id)</td>
+                                            <td>#(orcamento.cliente.nome)</a></td>
+                                            <td>#(orcamento.atendente.nome)</td>
+                                            <td>#(orcamento.status.nome)</td>
+                                            <td>#(orcamento.valor)</td>
+                                            <td><a href="/orcamentos/#(orcamento.id)">Ver Detalhes</a></td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><!--.box-typical-body-->
+                    </section><!--.box-typical-->
+                </div><!--.tab-pane-->
+                
+            </div><!--.tab-content-->
+        </section><!--.tabs-section-->
+        
+        
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+}
+

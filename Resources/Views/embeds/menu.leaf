@@ -1,0 +1,63 @@
+<div class="mobile-menu-left-overlay"></div>
+<nav class="side-menu side-menu-compact">
+    <ul class="side-menu-list">
+        <li class="purple">
+            <a href="/dashboard">
+                <i class="font-icon font-icon-home"></i>
+                <span class="lbl">Início</span>
+            </a>
+        </li>
+        
+        <li class="blue">
+            <a href="/calendario" style="pointer-events: none; cursor: default;">
+                <i class="font-icon font-icon-calend"></i>
+                <span class="lbl">Calendário</span>
+            </a>
+        </li>
+        <li class="green">
+            <a href="/orcamentos" style="">
+                <i class="font-icon font-icon-page"></i>
+                <span class="lbl">Orçamentos</span>
+            </a>
+        </li>
+        <li class="magenta">
+            <a href="/servicos" style="pointer-events: none; cursor: default;">
+                <i class="font-icon font-icon-check-square"></i>
+                <span class="lbl">Serviços</span>
+            </a>
+        </li>
+        <li class="coral">
+            <a href="/clientes" style="">
+                <i class="font-icon font-icon-user"></i>
+                <span class="lbl">Clientes</span>
+            </a>
+        </li>
+        <li class="gold">
+            <a href="/comissoes" style="pointer-events: none; cursor: default;">
+                <i class="font-icon font-icon-star"></i>
+                <span class="lbl">Comissões</span>
+            </a>
+        </li>
+        <li class="blue-dark">
+            <a href="/relatorios" style="pointer-events: none; cursor: default;">
+                <i class="font-icon font-icon-chart-2"></i>
+                <span class="lbl">Relatórios</span>
+            </a>
+        </li>
+        <li class="blue-sky">
+            <a href="/historico" style="pointer-events: none; cursor: default;">
+                <i class="font-icon font-icon-zigzag"></i>
+                <span class="lbl">Histórico</span>
+            </a>
+        </li>
+        <li class="red">
+            <a href="/configuracoes">
+                <i class="font-icon font-icon-cogwheel"></i>
+                <span class="lbl">Configurações</span>
+            </a>
+        </li>
+        
+        
+        
+    </ul>
+</nav><!--.side-menu-->

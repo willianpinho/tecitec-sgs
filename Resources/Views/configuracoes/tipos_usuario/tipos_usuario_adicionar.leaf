@@ -1,0 +1,46 @@
+#extend("embeds/base")
+
+#export("title") { Tecitec - Adicionar Tipos de Usuários }
+
+#export("content") {
+<div class="page-content">
+    <div class="container-fluid">
+        <header class="section-header">
+            <div class="tbl">
+                <div class="tbl-row">
+                    <div class="tbl-cell">
+                        <h3>Tipos de Usuário</h3>
+                        <ol class="breadcrumb breadcrumb-simple">
+                            <li><a href="/">Tecitec</a></li>
+                            <li><a href="/configuracoes">Configurações</a></li>
+                            <li><a href="/configuracoes/tipos-usuario">Tipos de Usuário</a></li>
+                            <li class="active">Adicionar Tipo de Usuário</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="box-typical box-typical-padding">
+            <h5 class="m-t-lg with-border">Adicionar Tipo de Usuário</h5>
+            <form id="form-group" role="form" autocomplete="on" action="/configuracoes/tipos-usuario/adicionar" method="post">
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Nome</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><input type="text" class="form-control" id="" placeholder="" name="nome" /></p>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn pull-right">Adicionar Tipo de Usuário</button>
+                    </div>
+                </div>
+                
+                
+            </form>
+        </div><!--.box-typical-->
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+}
+

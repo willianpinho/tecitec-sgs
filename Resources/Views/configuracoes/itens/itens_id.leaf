@@ -1,0 +1,44 @@
+#extend("embeds/base")
+
+#export("title") { Tecitec - Editar Item #(item.nome)}
+
+#export("content") {
+<div class="page-content">
+    <div class="container-fluid">
+        <header class="section-header">
+            <div class="tbl">
+                <div class="tbl-row">
+                    <div class="tbl-cell">
+                        <h3>Itens</h3>
+                        <ol class="breadcrumb breadcrumb-simple">
+                            <li><a href="/">Tecitec</a></li>
+                            <li><a href="/configuracoes">Configurações</a></li>
+                            <li><a href="/configuracoes/itens">Itens</a></li>
+                            <li class="active">#(item.nome)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="box-typical box-typical-padding">
+            <ul class=" ">
+                <form id="form-group" role="form" autocomplete="on" action="/configuracoes/itens/#(item.id)/editar" method="get">
+                    <li><button type="submit" class="btn btn-inline pull-right btn-warning-outline">Editar Item</button></li>
+                </form>
+                
+            </ul>
+            <h5 class="m-t-lg with-border">Dados da Item</h5>
+            
+            <div class="form-group row">
+                <b><label class="col-sm-2 form-control-label">Nome:</label></b>
+                <div class="col-sm-10">
+                    <p class="form-control-static">#(item.nome)</p>
+                </div>
+            </div>
+            
+            
+        </div><!--.box-typical-->
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+}
+

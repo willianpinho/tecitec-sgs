@@ -1,0 +1,62 @@
+#extend("embeds/base")
+
+#export("title") { Tecitec - Editar Material #(material.nome)}
+
+#export("content") {
+<div class="page-content">
+    <div class="container-fluid">
+        <header class="section-header">
+            <div class="tbl">
+                <div class="tbl-row">
+                    <div class="tbl-cell">
+                        <h3>Materiais</h3>
+                        <ol class="breadcrumb breadcrumb-simple">
+                            <li><a href="/">Tecitec</a></li>
+                            <li><a href="/configuracoes">Configurações</a></li>
+                            <li><a href="/configuracoes/produtos">Produtos</a></li>
+                            <li class="active">#(produto.id)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="box-typical box-typical-padding">
+            <ul class=" ">
+                <form id="form-group" role="form" autocomplete="on" action="/configuracoes/produtos/#(produto.id)/editar" method="get">
+                    <li><button type="submit" class="btn btn-inline pull-right btn-warning-outline">Editar Produto</button></li>
+                </form>
+                
+            </ul>
+            <h5 class="m-t-lg with-border">Dados do Produto</h5>
+            
+            <div class="form-group row">
+                <b><label class="col-sm-2 form-control-label">Tipo do Serviço:</label></b>
+                <div class="col-sm-10">
+                    <p class="form-control-static">#(produto.tipo_servico.nome)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <b><label class="col-sm-2 form-control-label">item:</label></b>
+                <div class="col-sm-10">
+                    <p class="form-control-static">#(produto.item.nome)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <b><label class="col-sm-2 form-control-label">Custo:</label></b>
+                <div class="col-sm-10">
+                    <p class="form-control-static">R$ #(produto.custo)</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <b><label class="col-sm-2 form-control-label">Preço:</label></b>
+                <div class="col-sm-10">
+                    <p class="form-control-static">R$ #(produto.preco)</p>
+                </div>
+            </div>
+            
+            
+        </div><!--.box-typical-->
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+}
+

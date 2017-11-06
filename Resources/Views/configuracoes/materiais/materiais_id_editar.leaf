@@ -1,0 +1,53 @@
+#extend("embeds/base")
+
+#export("title") { Tecitec - Editar Materiais }
+
+#export("content") {
+<div class="page-content">
+    <div class="container-fluid">
+        <header class="section-header">
+            <div class="tbl">
+                <div class="tbl-row">
+                    <div class="tbl-cell">
+                        <h3>Materiais</h3>
+                        <ol class="breadcrumb breadcrumb-simple">
+                            <li><a href="/">Tecitec</a></li>
+                            <li><a href="/configuracoes">Configurações</a></li>
+                            <li><a href="/configuracoes/materials">Materiais</a></li>
+                            <li class="active">Editar Material #(material.nome)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="box-typical box-typical-padding">
+            <ul class=" ">
+                <form id="form-group" role="form" autocomplete="on" action="/configuracoes/materiais/#(material.id)/deletar" method="post">
+                    <li><button type="submit" class="btn btn-inline pull-right btn-danger-outline">Deletar Material</button></li>
+                </form>
+                
+            </ul>
+            <h5 class="m-t-lg with-border">Editar Material</h5>
+            <form id="form-group" role="form" autocomplete="on" action="/configuracoes/materiais/#(material.id)/editar" method="post">
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Nome</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><input type="text" class="form-control" id="" placeholder="" value="#(material.nome)" name="nome" /></p>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn pull-right btn-inline btn-warning">Editar Material</button>
+                        
+                    </div>
+                </div>
+                
+                
+            </form>
+        </div><!--.box-typical-->
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+}
+

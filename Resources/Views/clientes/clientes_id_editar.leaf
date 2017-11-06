@@ -1,0 +1,132 @@
+#extend("embeds/base")
+
+#export("title") { Tecitec - Clientes }
+
+#export("content") {
+<div class="page-content">
+    <div class="container-fluid">
+        
+        
+        <header class="section-header">
+            <div class="tbl">
+                <div class="tbl-row">
+                    <div class="tbl-cell">
+                        <h3>Clientes</h3>
+                        <ol class="breadcrumb breadcrumb-simple">
+                            <li><a href="">Tecitec</a></li>
+                            <li class="active">Clientes</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="box-typical box-typical-padding">
+            <ul class=" ">
+                <form id="form-group" role="form" autocomplete="on" action="/clientes/#(cliente.id)/deletar" method="post">
+                    <li><button type="submit" class="btn btn-inline pull-right btn-danger-outline">Deletar Cliente</button></li>
+                </form>
+                
+            </ul>
+            <h5 class="m-t-lg with-border">Editar Cliente</h5>
+            <form id="form-group" role="form" autocomplete="on" action="/clientes/#(cliente.id)/editar" method="post">
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Nome</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><input type="text" class="form-control" id="" placeholder="" name="nome" value="#(cliente.nome)" /></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Email</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><input type="email" class="form-control" id="" placeholder="" name="email" value="#(cliente.email)" /></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Tipo Cliente</label>
+                    <div class="col-sm-4">
+                        <select id="tipo" class="form-control select" name="tipo_id">
+                            #loop(tipos, "tipo") {
+                            #equal(tipo.id, cliente.tipo.id) {
+                            <option value="#(tipo.id)" selected>#(tipo.nome)</option>
+                            } ##else() {
+                            <option value="#(tipo.id)">#(tipo.nome)</option>
+                            }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Documento</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><input type="text" class="form-control" id="" placeholder="" name="documento" value="#(cliente.documento)"/></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Endereço</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><input type="text" class="form-control" id="" placeholder="" name="endereco" value="#(cliente.endereco)" /></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Complemento</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><input type="text" class="form-control" id="" placeholder="" name="complemento" value="#(cliente.complemento)" /></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">CEP</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><input type="text" class="form-control" id="zip-code-mask-input" placeholder="" name="cep" value="#(cliente.cep)" /></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Cidade</label>
+                    <div class="col-sm-4">
+                        <select id="cidade" class="form-control select" name="cidade_id">
+                            #loop(cidades, "cidade") {
+                            #equal(cidade.id, cliente.cidade.id) {
+                            <option value="#(cidade.id)" selected>#(cidade.nome)</option>
+                            } ##else() {
+                            <option value="#(cidade.id)">#(cidade.nome)</option>
+                            }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Celular</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><input type="text" class="form-control" id="br-celphone-mask-input" placeholder="" name="celular" value="#(cliente.celular)" /></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Telefone</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><input type="text" class="form-control" id="phone-with-code-area-mask-input" placeholder="" name="telefone" value="#(cliente.telefone)" /></p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label" for="date-mask-input">Data de Nascimento</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><input type="text" name="data_nascimento" class="form-control" id="date-mask-input" value="#(cliente.data_nascimento)" ></p>
+                            </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 form-control-label">Observações</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static"><textarea type="text" class="form-control" id="" placeholder="" name="observacoes">#(cliente.observacoes)</textarea></p>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn pull-right">Editar Cliente</button>
+                    </div>
+                </div>
+                
+            </form>
+        </div><!--.box-typical-->
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+}
+
