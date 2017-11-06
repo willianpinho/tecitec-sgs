@@ -20,13 +20,19 @@ final class Orcamento: Model {
     var cliente: Identifier?
     var empresa: Identifier?
     var observacoes: String
+    var valor: Double?
+    var desconto: Double?
+    var status: Identifier?
     
     /// Creates a new Orcamento
-    init(atendente: Usuario, cliente: Usuario, empresa: Empresa, observacoes: String) {
+    init(atendente: Usuario, cliente: Usuario, empresa: Empresa, observacoes: String, valor: Double, desconto: Double, status: Status) {
         self.atendente = atendente.id
         self.cliente = cliente.id
         self.empresa = empresa.id
         self.observacoes = observacoes
+        self.valor = valor
+        self.desconto = desconto
+        self.status = status.id
     }
     
     // MARK: Fluent Serialization
@@ -38,7 +44,9 @@ final class Orcamento: Model {
         cliente = try row.get("cliente_id")
         empresa = try row.get("empresa_id")
         observacoes = try row.get("observacoes")
-
+        valor = try row.get("valor")
+        desconto = try row.get("desconto")
+        status = try row.get("status_id")
     }
     
     // Serializes the Orcamento to the database
@@ -48,6 +56,9 @@ final class Orcamento: Model {
         try row.set("cliente_id", cliente)
         try row.set("empresa_id", empresa)
         try row.set("observacoes", observacoes)
+        try row.set("valor", valor)
+        try row.set("desconto", desconto)
+        try row.set("status_id", status)
 
         return row
     }
@@ -65,8 +76,9 @@ extension Orcamento: Preparation {
             builder.int("cliente_id")
             builder.int("empresa_id")
             builder.string("observacoes")
-
-            
+            builder.double("valor", optional: true)
+            builder.double("desconto", optional: true)
+            builder.int("status_id")
         }
     }
     
@@ -89,17 +101,27 @@ extension Orcamento: JSONConvertible {
             atendente: json.get("atendente_id"),
             cliente: json.get("cliente_id"),
             empresa: json.get("empresa_id"),
-            observacoes: json.get("observacoes")
+            observacoes: json.get("observacoes"),
+            valor: json.get("valor"),
+            desconto: json.get("desconto"),
+            status: json.get("status_id")
         )
     }
     
     func makeJSON() throws -> JSON {
         var json = JSON()
         try json.set("id", id)
-        try json.set("atendente_id", atendente)
-        try json.set("cliente_id", cliente)
-        try json.set("empresa_id", empresa)
+        let atendenteObject = try Usuario.find(atendente)?.makeJSON()
+        try json.set("atendente", atendenteObject)
+        let clienteObject = try Usuario.find(cliente)?.makeJSON()
+        try json.set("cliente", clienteObject)
+        let empresaObject = try Empresa.find(empresa)?.makeJSON()
+        try json.set("empresa", empresaObject)
         try json.set("observacoes", observacoes)
+        try json.set("valor", valor)
+        try json.set("desconto", desconto)
+        let statusObject = try Status.find(status)?.makeJSON()
+        try json.set("status", statusObject)
 
         return json
     }

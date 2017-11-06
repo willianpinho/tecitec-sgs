@@ -1,3 +1,7 @@
 {
-    "driver": "mysql"
+    "driver": "mysql",
+    "keyNamingConvention": "snake_case",
+    "migrationEntityName": "fluent",
+    "defaultPageKey": "page",
+    "defaultPageSize": 10
 }

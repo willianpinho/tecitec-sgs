@@ -23,6 +23,9 @@ extension Droplet {
         let historico = HistoricoController(view)
         historico.addRoutes(drop: self)
         
+        let login = LoginController(view)
+        login.addRoutes(drop: self)
+        
         let orcamentos = OrcamentosController(view)
         orcamentos.addRoutes(drop: self)
         
@@ -31,6 +34,8 @@ extension Droplet {
         
         let servicos = ServicosController(view)
         servicos.addRoutes(drop: self)
+        
+        
 
         
     }

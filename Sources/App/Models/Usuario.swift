@@ -9,8 +9,10 @@
 import Vapor
 import FluentProvider
 import HTTP
+import Fluent
+import AuthProvider
 
-final class Usuario: Model {
+final class Usuario: Model, PasswordAuthenticatable, SessionPersistable {
     static let entity = "usuarios"
     
     let storage = Storage()

@@ -10,8 +10,9 @@ INSERT INTO usuarios_tipo (nome,created_at,updated_at) VALUES ('Cliente Pessoa J
 INSERT INTO status (nome,created_at,updated_at) VALUES ('Orçamento - A entrar em contato',now(),now());
 INSERT INTO status (nome,created_at,updated_at) VALUES ('Orçamento - Em negociação',now(),now());
 INSERT INTO status (nome,created_at,updated_at) VALUES ('Orçamento - Cancelado',now(),now());
-INSERT INTO status (nome,created_at,updated_at) VALUES ('Serviço - A Iniciar',now(),now());
-INSERT INTO status (nome,created_at,updated_at) VALUES ('Serviço - A Remarcar data',now(),now());
+INSERT INTO status (nome,created_at,updated_at) VALUES ('Orçamento - Fechado',now(),now());
+INSERT INTO status (nome,created_at,updated_at) VALUES ('Serviço - Iniciado',now(),now());
+INSERT INTO status (nome,created_at,updated_at) VALUES ('Serviço - A marcar data',now(),now());
 INSERT INTO status (nome,created_at,updated_at) VALUES ('Serviço - Finalizado',now(),now());
 INSERT INTO status (nome,created_at,updated_at) VALUES ('Serviço - Cancelado',now(),now());
 INSERT INTO status (nome,created_at,updated_at) VALUES ('Ativo',now(),now());

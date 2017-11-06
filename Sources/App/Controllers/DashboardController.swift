@@ -20,9 +20,14 @@ final class DashboardController: ResourceRepresentable {
     }
     
     func index(request: Request) throws -> ResponseRepresentable {
+        guard let usuarioCorrente = try Util.getUser(request: request)?.makeJSON() else {
+            return Response(redirect: "/")
+        }
+        
         let parameters = try Node(node: [
-            
+            "usuario": usuarioCorrente
             ])
+        
         return try view.make("dashboard/administrador", parameters)
     }
     

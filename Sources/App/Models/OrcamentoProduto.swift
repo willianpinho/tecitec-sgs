@@ -10,19 +10,19 @@ import Vapor
 import FluentProvider
 import HTTP
 
-final class OrcamentoItem: Model {
-    static let entity = "orcamento_itens"
+final class OrcamentoProduto: Model {
+    static let entity = "orcamento_produtos"
     
     let storage = Storage()
     
     /// The content of the itens
     var orcamento: Identifier?
-    var servico: Identifier?
+    var produto: Identifier?
     
     /// Creates a new OrcamentoItem
-    init(orcamento: Orcamento, servico: Servico) {
+    init(orcamento: Orcamento, produto: Produto) {
         self.orcamento = orcamento.id
-        self.servico = servico.id
+        self.produto = produto.id
     }
     
     // MARK: Fluent Serialization
@@ -31,7 +31,7 @@ final class OrcamentoItem: Model {
     /// database row
     init(row: Row) throws {
         orcamento = try row.get("orcamento_id")
-        servico = try row.get("servico_id")
+        produto = try row.get("produto_id")
 
     }
     
@@ -39,7 +39,7 @@ final class OrcamentoItem: Model {
     func makeRow() throws -> Row {
         var row = Row()
         try row.set("orcamento_id", orcamento)
-        try row.set("servico_id", servico)
+        try row.set("produto_id", produto)
 
         return row
     }
@@ -47,14 +47,14 @@ final class OrcamentoItem: Model {
 
 // MARK: Fluent Preparation
 
-extension OrcamentoItem: Preparation {
+extension OrcamentoProduto: Preparation {
     /// Prepares a table/collection in the database
     /// for storing OrcamentoItems
     static func prepare(_ database: Database) throws {
         try database.create(self) { builder in
             builder.id()
             builder.int("orcamento_id")
-            builder.int("servico_id")
+            builder.int("produto_id")
         }
     }
     
@@ -71,11 +71,11 @@ extension OrcamentoItem: Preparation {
 //     - Creating a new OrcamentoItem (POST /itenss)
 //     - Fetching a itens (GET /itenss, GET /itenss/:id)
 //
-extension OrcamentoItem: JSONConvertible {
+extension OrcamentoProduto: JSONConvertible {
     convenience init(json: JSON) throws {
         try self.init(
             orcamento: json.get("orcamento_id"),
-            servico: json.get("servico_id")
+            produto: json.get("produto_id")
             
         )
     }
@@ -84,9 +84,8 @@ extension OrcamentoItem: JSONConvertible {
         var json = JSON()
         try json.set("id", id)
         try json.set("orcamento_id", orcamento)
-        try json.set("servico_id", servico)
+        try json.set("produto_id", produto)
 
-        
         return json
     }
 }
@@ -94,9 +93,9 @@ extension OrcamentoItem: JSONConvertible {
 // MARK: HTTP
 
 // This allows OrcamentoItem models totime
-extension OrcamentoItem: ResponseRepresentable { }
+extension OrcamentoProduto: ResponseRepresentable { }
 
-extension OrcamentoItem: Timestampable {
+extension OrcamentoProduto: Timestampable {
     static var updatedAtKey: String { return "updated_at" }
     static var createdAtKey: String { return "created_at" }
 }

@@ -14,6 +14,7 @@ extension Config {
     /// Configure providers
     private func setupProviders() throws {
         try addProvider(LeafProvider.Provider.self)
+        try addProvider(FluentProvider.Provider.self)
     }
     
     /// Add all models that should have their
@@ -25,7 +26,7 @@ extension Config {
         preparations.append(Item.self)
         preparations.append(Material.self)
         preparations.append(Orcamento.self)
-        preparations.append(OrcamentoItem.self)
+        preparations.append(OrcamentoProduto.self)
         preparations.append(Produto.self)
         preparations.append(Regiao.self)
         preparations.append(Servico.self)

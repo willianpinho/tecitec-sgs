@@ -101,15 +101,6 @@
         }
       },
       {
-        "package": "Flash",
-        "repositoryURL": "https://github.com/nodes-vapor/flash",
-        "state": {
-          "branch": null,
-          "revision": "11fcef1a1f5f180bd63ef9c1b82c216288c049b0",
-          "version": "1.0.0"
-        }
-      },
-      {
         "package": "Fluent",
         "repositoryURL": "https://github.com/vapor/fluent.git",
         "state": {

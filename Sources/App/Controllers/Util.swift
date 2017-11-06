@@ -12,4 +12,16 @@ class Util {
         let modified = currency.replacingOccurrences(of: ",", with: ".")
         return Double(modified)!
     }
+    
+    static func getUser(request: Request) throws -> (Usuario?) {
+        let session = try request.assertSession()
+        if let userId = session.data["user_id"]?.string  {
+            let user = try Usuario.find(userId.int)
+            return user!
+        } else {
+            return nil
+        }
+        
+        
+    }
 }
