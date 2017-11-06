@@ -15,7 +15,7 @@
             </a>
         </li>
         <li class="green">
-            <a href="/orcamentos" style="">
+            <a href="/orcamentos" style="pointer-events: none; cursor: default;">
                 <i class="font-icon font-icon-page"></i>
                 <span class="lbl">Orçamentos</span>
             </a>
